@@ -1,0 +1,2 @@
+# ClubworldCore
+DotNet Core version
