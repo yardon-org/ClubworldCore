@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubWorld.Database", "ClubWorld.Database\ClubWorld.Database.csproj", "{16DCA0F9-917F-4751-8391-EC9644C83EC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubWorld.Web", "ClubWorld.Web\ClubWorld.Web.csproj", "{E52490BD-C3A6-4275-AF24-F828F0666C01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16DCA0F9-917F-4751-8391-EC9644C83EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DCA0F9-917F-4751-8391-EC9644C83EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DCA0F9-917F-4751-8391-EC9644C83EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DCA0F9-917F-4751-8391-EC9644C83EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E52490BD-C3A6-4275-AF24-F828F0666C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E52490BD-C3A6-4275-AF24-F828F0666C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E52490BD-C3A6-4275-AF24-F828F0666C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E52490BD-C3A6-4275-AF24-F828F0666C01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC0F2FE8-D9C2-4A7A-A98A-9AA0790CD879}
+	EndGlobalSection
+EndGlobal

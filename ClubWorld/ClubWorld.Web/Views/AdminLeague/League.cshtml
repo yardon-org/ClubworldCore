@@ -1,0 +1,20 @@
+﻿@model ClubWorld.Models.Leagues.LeagueListViewModel
+
+@{
+    ViewBag.Title = "League";
+}
+
+<h2>League</h2>
+
+<table class="table">
+    <tr>
+        <th>Current Leagues</th>
+    </tr>
+    @foreach (ClubWorld.Models.Leagues.League  lg in Model.ClubWorldLeagues)
+    {
+        <tr>
+            <td>@lg.Name</td>
+            <td>@Html.ActionLink("Admin", "Edit", new { lg.Id }, null)</td>
+        </tr>        
+    }
+</table>

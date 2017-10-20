@@ -1,0 +1,27 @@
+﻿@using ClubWorld.Models.Fixtures
+@model ClubWorld.Models.Fixtures.FixtureViewModel
+
+@{
+    ViewBag.Title = "Fixtures";
+}
+
+<h2>Fixtures</h2>
+@Html.
+<div>
+    <h4>Fixtures</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+<table class="="table">
+    @foreach (Game g in @Model.FixtureList)
+    {
+        <tr>
+            <td>@g.HomeTeam.Name</td>
+            <td>v</td>
+            <td>@g.AwayTeam.Name</td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
+</table>

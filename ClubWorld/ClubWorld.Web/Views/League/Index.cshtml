@@ -1,0 +1,46 @@
+﻿@using ClubWorld.Models.League
+@model IEnumerable<LeagueDetails>
+@section CustomStyle
+{
+    <link rel="stylesheet" href='@Url.Content("/Content/Site/league.css")' type="text/css" />
+}
+
+@Html.AntiForgeryToken()
+<h1>Domestic Leagues</h1>
+<div class="pagecontainer">
+    <div id="cw-league">
+        @foreach (LeagueDetails l in Model)
+        {
+            <p id="@l.Id">@l.Name</p>
+        }
+    </div>
+    <div id="section">
+        <div>
+            <ul class="cw-menuhorizontal">
+                <li id="Table">League Tables</li>
+                <li id="Fixture">Show Fixture List</li>
+                <li id="Result">Add Results</li>
+                <li id="Book">Create and Book Fixtures</li>
+                @*<li id="table">@Html.ActionLink("League Tables", "Table", "League")</li>
+            <li id="fixture">@Html.ActionLink("Show Fixture List", "Fixture", "League")</li>
+            <li id="result">@Html.ActionLink("Add Results", "Result", "League")</li>
+            <li id="book">@Html.ActionLink("Create and Book Fixtures", "Book", "League")</li>*@
+            </ul>
+        </div>
+        <div id="cw-leaguetable">
+            <div id="cw-title">
+                <h2 id="cw-leaguetitle">Please Select...</h2>
+            </div>
+            <div id="cw-leaguedataview">
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript" , src="~/Scripts/Site/League.js"></script>
+    <script>
+        cw_Ajax_Url = "League/Table";
+        cw_SuccessCallback = cw_LeagueTable_Success;
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿@using ClubWorld.Models.League
+@model  IEnumerable<LeagueTableViewModel>
+@section Scripts
+{
+    <script>
+        cw_Ajax_Url = "League/Table";
+        cw_SuccessCallback = cw_LeagueTable_Success;
+    </script>
+}<div id="cw-leaguetable">
+    <table>
+        <tr>
+            <th>Team</th>
+            <th>Play</th>
+            <th>Won</th>
+            <th>Drawn</th>
+            <th>Lost</th>
+            <th>For</th>
+            <th>Agst</th>
+            <th>Diff</th>
+            <th>Pts</th>
+        </tr>
+
+        @foreach (LeagueTableViewModel line in Model)
+        {
+            <tr>
+                <td>@line.TeamName</td>
+                <td>@line.Played</td>
+                <td>@line.GamesWon</td>
+                <td>@line.GamesDrawn</td>
+                <td>@line.GamesLost</td>
+                <td>@line.ShotsFor</td>
+                <td>@line.ShotsAgainst</td>
+                <td>@line.ShotDifference</td>
+                <td>@line.Points</td>
+            </tr>
+        }
+    </table>
+</div>

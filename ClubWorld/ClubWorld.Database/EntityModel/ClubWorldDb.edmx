@@ -1,0 +1,1261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClubWorldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="App_Config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Value" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="App_Members">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Forename" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audit_Booking_Diary">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiaryId" Type="int" Nullable="false" />
+          <Property Name="BookedDate" Type="date" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PostponedRef" Type="int" />
+          <Property Name="UserRef" Type="int" />
+        </EntityType>
+        <EntityType Name="Booking_AvailableSessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Booking_Diary">
+          <Key>
+            <PropertyRef Name="DiaryId" />
+          </Key>
+          <Property Name="DiaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="BookedDate" Type="date" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PostponedRef" Type="int" />
+          <Property Name="EntryType" Type="int" />
+          <Property Name="UserRef" Type="int" />
+        </EntityType>
+        <EntityType Name="Booking_Integrity">
+          <Key>
+            <PropertyRef Name="IntegrityId" />
+          </Key>
+          <Property Name="IntegrityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingRef" Type="int" Nullable="false" />
+          <Property Name="BookedDate" Type="date" Nullable="false" />
+          <Property Name="TeamRef" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking_Rink">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionRef" Type="int" Nullable="false" />
+          <Property Name="Rink" Type="int" Nullable="false" />
+          <Property Name="DiaryRef" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking_Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="TypeEnum" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Competition_Draw">
+          <Key>
+            <PropertyRef Name="DrawId" />
+          </Key>
+          <Property Name="DrawId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitionRef" Type="int" Nullable="false" />
+          <Property Name="RoundRef" Type="int" />
+          <Property Name="HomeRef" Type="int" />
+          <Property Name="AwayRef" Type="int" />
+        </EntityType>
+        <EntityType Name="Competition_Entries">
+          <Key>
+            <PropertyRef Name="EntrantId" />
+          </Key>
+          <Property Name="EntrantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitionRef" Type="int" Nullable="false" />
+          <Property Name="PlayerRef" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competition_List">
+          <Key>
+            <PropertyRef Name="CompetitionId" />
+          </Key>
+          <Property Name="CompetitionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubWorld.ClubWorld.Competition_Rounds' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Competition_Rounds">
+          <Key>
+            <PropertyRef Name="RoundId" />
+            <PropertyRef Name="CompetitionRef" />
+            <PropertyRef Name="RoundTitle" />
+            <PropertyRef Name="ClosingDate" />
+          </Key>
+          <Property Name="RoundId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitionRef" Type="int" Nullable="false" />
+          <Property Name="RoundTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClosingDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Fixtures">
+          <Key>
+            <PropertyRef Name="FixtureId" />
+          </Key>
+          <Property Name="FixtureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiaryRef" Type="int" Nullable="false" />
+          <Property Name="LeagueRef" Type="int" Nullable="false" />
+          <Property Name="HomeTeamRef" Type="int" Nullable="false" />
+          <Property Name="AwayTeamRef" Type="int" Nullable="false" />
+          <Property Name="FixtureTypeRef" Type="int" />
+        </EntityType>
+        <EntityType Name="League_FixtureType">
+          <Key>
+            <PropertyRef Name="FixtureTypeId" />
+          </Key>
+          <Property Name="FixtureTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PlayersPerRink" Type="int" Nullable="false" />
+          <Property Name="RinksRequired" Type="int" Nullable="false" />
+          <Property Name="PointsPerGame" Type="int" Nullable="false" />
+          <Property Name="PointsPerRink" Type="int" />
+        </EntityType>
+        <EntityType Name="League_List">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+          </Key>
+          <Property Name="LeagueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FixtureTypeRef" Type="int" />
+          <Property Name="DisplayColour" Type="int" />
+        </EntityType>
+        <EntityType Name="League_RegisteredPlayers">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+          </Key>
+          <Property Name="RegistrationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamRef" Type="int" Nullable="false" />
+          <Property Name="PlayerRef" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FixtureRef" Type="int" Nullable="false" />
+          <Property Name="ResultType" Type="int" Nullable="false" />
+          <Property Name="HomeShots" Type="int" Nullable="false" />
+          <Property Name="AwayShots" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_ResultPlayers">
+          <Key>
+            <PropertyRef Name="ResultPlayerId" />
+          </Key>
+          <Property Name="ResultPlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultRef" Type="int" Nullable="false" />
+          <Property Name="RegistrationRef" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LeagueRef" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubWorld.ClubWorld.VW_League_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_League_Details">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="LeagueId" Type="int" Nullable="false" />
+          <Property Name="FixtureTypeId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LeagueType" Type="varchar" MaxLength="30" />
+          <Property Name="RinksPerFixtue" Type="int" />
+          <Property Name="PointsPerGame" Type="int" />
+          <Property Name="PointsPerRink" Type="int" />
+          <Property Name="DisplayColour" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubWorld.ClubWorld.VW_RinkBookings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_RinkBookings">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="int" Nullable="false" />
+          <Property Name="Rink1" Type="int" />
+          <Property Name="Rink2" Type="int" />
+          <Property Name="Rink3" Type="int" />
+          <Property Name="Rink4" Type="int" />
+          <Property Name="Rink5" Type="int" />
+          <Property Name="Rink6" Type="int" />
+          <Property Name="Rink7" Type="int" />
+        </EntityType>
+        <Association Name="FK_League_Fixtures_Diary">
+          <End Role="Booking_Diary" Type="Self.Booking_Diary" Multiplicity="1" />
+          <End Role="League_Fixtures" Type="Self.League_Fixtures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking_Diary">
+              <PropertyRef Name="DiaryId" />
+            </Principal>
+            <Dependent Role="League_Fixtures">
+              <PropertyRef Name="DiaryRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_League_RegisteredPlayers_League_Teams">
+          <End Role="League_Teams" Type="Self.League_Teams" Multiplicity="1" />
+          <End Role="League_RegisteredPlayers" Type="Self.League_RegisteredPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League_Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="League_RegisteredPlayers">
+              <PropertyRef Name="TeamRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_League_Result_League_Fixtures">
+          <End Role="League_Fixtures" Type="Self.League_Fixtures" Multiplicity="1" />
+          <End Role="League_Result" Type="Self.League_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League_Fixtures">
+              <PropertyRef Name="FixtureId" />
+            </Principal>
+            <Dependent Role="League_Result">
+              <PropertyRef Name="FixtureRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_League_Teams_League_List">
+          <End Role="League_List" Type="Self.League_List" Multiplicity="1" />
+          <End Role="League_Teams" Type="Self.League_Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League_List">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="League_Teams">
+              <PropertyRef Name="LeagueRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddNewFixture" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="Desc" Type="varchar" Mode="In" />
+          <Parameter Name="Booked" Type="date" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+          <Parameter Name="RinkFlag" Type="int" Mode="In" />
+          <Parameter Name="Session" Type="int" Mode="In" />
+          <Parameter Name="LeagueId" Type="int" Mode="In" />
+          <Parameter Name="HomeTeam" Type="int" Mode="In" />
+          <Parameter Name="AwayTeam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GenerateCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="NoDays" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="SeqNo" Type="bigint" />
+                <Property Name="SeqByWk" Type="bigint" />
+                <Property Name="Date" Type="datetime" />
+                <Property Name="Year" Type="int" />
+                <Property Name="YrNN" Type="int" />
+                <Property Name="YYYYMM" Type="int" />
+                <Property Name="Month" Type="int" />
+                <Property Name="Day" Type="int" />
+                <Property Name="WkDNo" Type="int" />
+                <Property Name="WkDName" Type="nchar" MaxLength="9" />
+                <Property Name="WkDName2" Type="nchar" MaxLength="2" />
+                <Property Name="WkDName3" Type="nchar" MaxLength="3" />
+                <Property Name="JulDay" Type="int" />
+                <Property Name="JulWk" Type="int" />
+                <Property Name="WkNo" Type="int" />
+                <Property Name="Qtr" Type="int" />
+                <Property Name="Last" Type="int" />
+                <Property Name="LdOfMo" Type="int" />
+                <Property Name="LDtOfMo" Type="datetime" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetBookingsForDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="DateRequired" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetFreeRinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="SessionFlag" Type="int" Mode="In" />
+          <Parameter Name="DayFlag" Type="int" Mode="In" />
+          <Parameter Name="AltWeeks" Type="int" Mode="In" />
+          <Parameter Name="MinFree" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRinkBookings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="BookingDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertRinkBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="Desc" Type="varchar" Mode="In" />
+          <Parameter Name="Booked" Type="date" Mode="In" />
+          <Parameter Name="Status" Type="int" Mode="In" />
+          <Parameter Name="EntryType" Type="int" Mode="In" />
+          <Parameter Name="Rink" Type="int" Mode="In" />
+          <Parameter Name="Session" Type="int" Mode="In" />
+        </Function>
+        <Function Name="League_ShowLeagueTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="LeagueID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueResult_TeamsForFixture" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="FixtureId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueResults_AddResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="FixtureRef" Type="int" Mode="In" />
+          <Parameter Name="HomeShots" Type="int" Mode="In" />
+          <Parameter Name="AwayShots" Type="int" Mode="In" />
+          <Parameter Name="ResultId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="LeagueResults_AddResultPlayers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="ResultRef" Type="int" Mode="In" />
+          <Parameter Name="RegistrationRef" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueResults_FixturesForLeague" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="LeagueId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueResults_GetFixture" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="FixtureId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ShowBookingsForDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="RequestedDate" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="ClubWorldModelStoreContainer">
+          <EntitySet Name="App_Config" EntityType="Self.App_Config" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="App_Members" EntityType="Self.App_Members" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Audit_Booking_Diary" EntityType="Self.Audit_Booking_Diary" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Booking_AvailableSessions" EntityType="Self.Booking_AvailableSessions" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Booking_Diary" EntityType="Self.Booking_Diary" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Booking_Integrity" EntityType="Self.Booking_Integrity" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Booking_Rink" EntityType="Self.Booking_Rink" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Booking_Type" EntityType="Self.Booking_Type" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Competition_Draw" EntityType="Self.Competition_Draw" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Competition_Entries" EntityType="Self.Competition_Entries" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Competition_List" EntityType="Self.Competition_List" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_Fixtures" EntityType="Self.League_Fixtures" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_FixtureType" EntityType="Self.League_FixtureType" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_List" EntityType="Self.League_List" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_RegisteredPlayers" EntityType="Self.League_RegisteredPlayers" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_Result" EntityType="Self.League_Result" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_ResultPlayers" EntityType="Self.League_ResultPlayers" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_Teams" EntityType="Self.League_Teams" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="Competition_Rounds" EntityType="Self.Competition_Rounds" store:Type="Tables" store:Schema="ClubWorld">
+            <DefiningQuery>SELECT 
+    [Competition_Rounds].[RoundId] AS [RoundId], 
+    [Competition_Rounds].[CompetitionRef] AS [CompetitionRef], 
+    [Competition_Rounds].[RoundTitle] AS [RoundTitle], 
+    [Competition_Rounds].[ClosingDate] AS [ClosingDate]
+    FROM [ClubWorld].[Competition_Rounds] AS [Competition_Rounds]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_League_Details" EntityType="Self.VW_League_Details" store:Type="Views" store:Schema="ClubWorld">
+            <DefiningQuery>SELECT 
+    [VW_League_Details].[LeagueId] AS [LeagueId], 
+    [VW_League_Details].[FixtureTypeId] AS [FixtureTypeId], 
+    [VW_League_Details].[Description] AS [Description], 
+    [VW_League_Details].[LeagueType] AS [LeagueType], 
+    [VW_League_Details].[RinksPerFixtue] AS [RinksPerFixtue], 
+    [VW_League_Details].[PointsPerGame] AS [PointsPerGame], 
+    [VW_League_Details].[PointsPerRink] AS [PointsPerRink], 
+    [VW_League_Details].[DisplayColour] AS [DisplayColour]
+    FROM [ClubWorld].[VW_League_Details] AS [VW_League_Details]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_RinkBookings" EntityType="Self.VW_RinkBookings" store:Type="Views" store:Schema="ClubWorld">
+            <DefiningQuery>SELECT 
+    [VW_RinkBookings].[SessionID] AS [SessionID], 
+    [VW_RinkBookings].[Rink1] AS [Rink1], 
+    [VW_RinkBookings].[Rink2] AS [Rink2], 
+    [VW_RinkBookings].[Rink3] AS [Rink3], 
+    [VW_RinkBookings].[Rink4] AS [Rink4], 
+    [VW_RinkBookings].[Rink5] AS [Rink5], 
+    [VW_RinkBookings].[Rink6] AS [Rink6], 
+    [VW_RinkBookings].[Rink7] AS [Rink7]
+    FROM [ClubWorld].[VW_RinkBookings] AS [VW_RinkBookings]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_League_Fixtures_Diary" Association="Self.FK_League_Fixtures_Diary">
+            <End Role="Booking_Diary" EntitySet="Booking_Diary" />
+            <End Role="League_Fixtures" EntitySet="League_Fixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_League_RegisteredPlayers_League_Teams" Association="Self.FK_League_RegisteredPlayers_League_Teams">
+            <End Role="League_Teams" EntitySet="League_Teams" />
+            <End Role="League_RegisteredPlayers" EntitySet="League_RegisteredPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_League_Result_League_Fixtures" Association="Self.FK_League_Result_League_Fixtures">
+            <End Role="League_Fixtures" EntitySet="League_Fixtures" />
+            <End Role="League_Result" EntitySet="League_Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_League_Teams_League_List" Association="Self.FK_League_Teams_League_List">
+            <End Role="League_List" EntitySet="League_List" />
+            <End Role="League_Teams" EntitySet="League_Teams" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClubWorldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GenerateCalendar_Result">
+          <Property Name="SeqNo" Type="Int64" />
+          <Property Name="SeqByWk" Type="Int64" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="YrNN" Type="Int32" />
+          <Property Name="YYYYMM" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Day" Type="Int32" />
+          <Property Name="WkDNo" Type="Int32" />
+          <Property Name="WkDName" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="WkDName2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="WkDName3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="JulDay" Type="Int32" />
+          <Property Name="JulWk" Type="Int32" />
+          <Property Name="WkNo" Type="Int32" />
+          <Property Name="Qtr" Type="Int32" />
+          <Property Name="Last" Type="Int32" />
+          <Property Name="LdOfMo" Type="Int32" />
+          <Property Name="LDtOfMo" Type="DateTime" />
+        </ComplexType>
+        <EntityType Name="App_Config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="App_Members">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Forename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audit_Booking_Diary">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiaryId" Type="Int32" Nullable="false" />
+          <Property Name="BookedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PostponedRef" Type="Int32" />
+          <Property Name="UserRef" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Booking_AvailableSessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Booking_Diary">
+          <Key>
+            <PropertyRef Name="DiaryId" />
+          </Key>
+          <Property Name="DiaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BookedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PostponedRef" Type="Int32" />
+          <Property Name="EntryType" Type="Int32" />
+          <Property Name="UserRef" Type="Int32" />
+          <NavigationProperty Name="League_Fixtures" Relationship="Self.FK_League_Fixtures_Diary" FromRole="Booking_Diary" ToRole="League_Fixtures" />
+        </EntityType>
+        <EntityType Name="Booking_Integrity">
+          <Key>
+            <PropertyRef Name="IntegrityId" />
+          </Key>
+          <Property Name="IntegrityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingRef" Type="Int32" Nullable="false" />
+          <Property Name="BookedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TeamRef" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking_Rink">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionRef" Type="Int32" Nullable="false" />
+          <Property Name="Rink" Type="Int32" Nullable="false" />
+          <Property Name="DiaryRef" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking_Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="TypeEnum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Competition_Draw">
+          <Key>
+            <PropertyRef Name="DrawId" />
+          </Key>
+          <Property Name="DrawId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitionRef" Type="Int32" Nullable="false" />
+          <Property Name="RoundRef" Type="Int32" />
+          <Property Name="HomeRef" Type="Int32" />
+          <Property Name="AwayRef" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Competition_Entries">
+          <Key>
+            <PropertyRef Name="EntrantId" />
+          </Key>
+          <Property Name="EntrantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitionRef" Type="Int32" Nullable="false" />
+          <Property Name="PlayerRef" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competition_List">
+          <Key>
+            <PropertyRef Name="CompetitionId" />
+          </Key>
+          <Property Name="CompetitionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Fixtures">
+          <Key>
+            <PropertyRef Name="FixtureId" />
+          </Key>
+          <Property Name="FixtureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiaryRef" Type="Int32" Nullable="false" />
+          <Property Name="LeagueRef" Type="Int32" Nullable="false" />
+          <Property Name="HomeTeamRef" Type="Int32" Nullable="false" />
+          <Property Name="AwayTeamRef" Type="Int32" Nullable="false" />
+          <Property Name="FixtureTypeRef" Type="Int32" />
+          <NavigationProperty Name="Booking_Diary" Relationship="Self.FK_League_Fixtures_Diary" FromRole="League_Fixtures" ToRole="Booking_Diary" />
+          <NavigationProperty Name="League_Result" Relationship="Self.FK_League_Result_League_Fixtures" FromRole="League_Fixtures" ToRole="League_Result" />
+        </EntityType>
+        <EntityType Name="League_FixtureType">
+          <Key>
+            <PropertyRef Name="FixtureTypeId" />
+          </Key>
+          <Property Name="FixtureTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlayersPerRink" Type="Int32" Nullable="false" />
+          <Property Name="RinksRequired" Type="Int32" Nullable="false" />
+          <Property Name="PointsPerGame" Type="Int32" Nullable="false" />
+          <Property Name="PointsPerRink" Type="Int32" />
+        </EntityType>
+        <EntityType Name="League_List">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+          </Key>
+          <Property Name="LeagueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FixtureTypeRef" Type="Int32" />
+          <Property Name="DisplayColour" Type="Int32" />
+          <NavigationProperty Name="League_Teams" Relationship="Self.FK_League_Teams_League_List" FromRole="League_List" ToRole="League_Teams" />
+        </EntityType>
+        <EntityType Name="League_RegisteredPlayers">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+          </Key>
+          <Property Name="RegistrationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamRef" Type="Int32" Nullable="false" />
+          <Property Name="PlayerRef" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="League_Teams" Relationship="Self.FK_League_RegisteredPlayers_League_Teams" FromRole="League_RegisteredPlayers" ToRole="League_Teams" />
+        </EntityType>
+        <EntityType Name="League_Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FixtureRef" Type="Int32" Nullable="false" />
+          <Property Name="ResultType" Type="Int32" Nullable="false" />
+          <Property Name="HomeShots" Type="Int32" Nullable="false" />
+          <Property Name="AwayShots" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="League_Fixtures" Relationship="Self.FK_League_Result_League_Fixtures" FromRole="League_Result" ToRole="League_Fixtures" />
+        </EntityType>
+        <EntityType Name="League_ResultPlayers">
+          <Key>
+            <PropertyRef Name="ResultPlayerId" />
+          </Key>
+          <Property Name="ResultPlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultRef" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationRef" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LeagueRef" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="League_List" Relationship="Self.FK_League_Teams_League_List" FromRole="League_Teams" ToRole="League_List" />
+          <NavigationProperty Name="League_RegisteredPlayers" Relationship="Self.FK_League_RegisteredPlayers_League_Teams" FromRole="League_Teams" ToRole="League_RegisteredPlayers" />
+        </EntityType>
+        <EntityType Name="Competition_Rounds">
+          <Key>
+            <PropertyRef Name="RoundId" />
+            <PropertyRef Name="CompetitionRef" />
+            <PropertyRef Name="RoundTitle" />
+            <PropertyRef Name="ClosingDate" />
+          </Key>
+          <Property Name="RoundId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitionRef" Type="Int32" Nullable="false" />
+          <Property Name="RoundTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClosingDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK_League_Fixtures_Diary">
+          <End Role="Booking_Diary" Type="Self.Booking_Diary" Multiplicity="1" />
+          <End Role="League_Fixtures" Type="Self.League_Fixtures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking_Diary">
+              <PropertyRef Name="DiaryId" />
+            </Principal>
+            <Dependent Role="League_Fixtures">
+              <PropertyRef Name="DiaryRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_League_Result_League_Fixtures">
+          <End Role="League_Fixtures" Type="Self.League_Fixtures" Multiplicity="1" />
+          <End Role="League_Result" Type="Self.League_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League_Fixtures">
+              <PropertyRef Name="FixtureId" />
+            </Principal>
+            <Dependent Role="League_Result">
+              <PropertyRef Name="FixtureRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_League_Teams_League_List">
+          <End Role="League_List" Type="Self.League_List" Multiplicity="1" />
+          <End Role="League_Teams" Type="Self.League_Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League_List">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="League_Teams">
+              <PropertyRef Name="LeagueRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_League_RegisteredPlayers_League_Teams">
+          <End Role="League_Teams" Type="Self.League_Teams" Multiplicity="1" />
+          <End Role="League_RegisteredPlayers" Type="Self.League_RegisteredPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League_Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="League_RegisteredPlayers">
+              <PropertyRef Name="TeamRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClubWorldDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="App_Config" EntityType="Self.App_Config" />
+          <EntitySet Name="App_Members" EntityType="Self.App_Members" />
+          <EntitySet Name="Audit_Booking_Diary" EntityType="Self.Audit_Booking_Diary" />
+          <EntitySet Name="Booking_AvailableSessions" EntityType="Self.Booking_AvailableSessions" />
+          <EntitySet Name="Booking_Diary" EntityType="Self.Booking_Diary" />
+          <EntitySet Name="Booking_Integrity" EntityType="Self.Booking_Integrity" />
+          <EntitySet Name="Booking_Rink" EntityType="Self.Booking_Rink" />
+          <EntitySet Name="Booking_Type" EntityType="Self.Booking_Type" />
+          <EntitySet Name="Competition_Draw" EntityType="Self.Competition_Draw" />
+          <EntitySet Name="Competition_Entries" EntityType="Self.Competition_Entries" />
+          <EntitySet Name="Competition_List" EntityType="Self.Competition_List" />
+          <EntitySet Name="League_Fixtures" EntityType="Self.League_Fixtures" />
+          <EntitySet Name="League_FixtureType" EntityType="Self.League_FixtureType" />
+          <EntitySet Name="League_List" EntityType="Self.League_List" />
+          <EntitySet Name="League_RegisteredPlayers" EntityType="Self.League_RegisteredPlayers" />
+          <EntitySet Name="League_Result" EntityType="Self.League_Result" />
+          <EntitySet Name="League_ResultPlayers" EntityType="Self.League_ResultPlayers" />
+          <EntitySet Name="League_Teams" EntityType="Self.League_Teams" />
+          <EntitySet Name="Competition_Rounds" EntityType="Self.Competition_Rounds" />
+          <AssociationSet Name="FK_League_Fixtures_Diary" Association="Self.FK_League_Fixtures_Diary">
+            <End Role="Booking_Diary" EntitySet="Booking_Diary" />
+            <End Role="League_Fixtures" EntitySet="League_Fixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_League_Result_League_Fixtures" Association="Self.FK_League_Result_League_Fixtures">
+            <End Role="League_Fixtures" EntitySet="League_Fixtures" />
+            <End Role="League_Result" EntitySet="League_Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_League_Teams_League_List" Association="Self.FK_League_Teams_League_List">
+            <End Role="League_List" EntitySet="League_List" />
+            <End Role="League_Teams" EntitySet="League_Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_League_RegisteredPlayers_League_Teams" Association="Self.FK_League_RegisteredPlayers_League_Teams">
+            <End Role="League_Teams" EntitySet="League_Teams" />
+            <End Role="League_RegisteredPlayers" EntitySet="League_RegisteredPlayers" />
+          </AssociationSet>
+          <FunctionImport Name="GenerateCalendar" IsComposable="true" ReturnType="Collection(ClubWorldModel.GenerateCalendar_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="NoDays" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewFixture">
+            <Parameter Name="Desc" Mode="In" Type="String" />
+            <Parameter Name="Booked" Mode="In" Type="DateTime" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+            <Parameter Name="RinkFlag" Mode="In" Type="Int32" />
+            <Parameter Name="Session" Mode="In" Type="Int32" />
+            <Parameter Name="LeagueId" Mode="In" Type="Int32" />
+            <Parameter Name="HomeTeam" Mode="In" Type="Int32" />
+            <Parameter Name="AwayTeam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBookingsForDay" ReturnType="Collection(ClubWorldModel.GetBookingsForDay_Result)">
+          <Parameter Name="DateRequired" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetFreeRinks" ReturnType="Collection(ClubWorldModel.GetFreeRinks_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="SessionFlag" Mode="In" Type="Int32" />
+            <Parameter Name="DayFlag" Mode="In" Type="Int32" />
+            <Parameter Name="AltWeeks" Mode="In" Type="Int32" />
+            <Parameter Name="MinFree" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRinkBookings">
+          <Parameter Name="BookingDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertRinkBooking">
+            <Parameter Name="Desc" Mode="In" Type="String" />
+            <Parameter Name="Booked" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+            <Parameter Name="EntryType" Mode="In" Type="Int32" />
+            <Parameter Name="Rink" Mode="In" Type="Int32" />
+            <Parameter Name="Session" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="League_ShowLeagueTable" ReturnType="Collection(ClubWorldModel.League_ShowLeagueTable_Result)">
+          <Parameter Name="LeagueID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueResult_TeamsForFixture" ReturnType="Collection(ClubWorldModel.LeagueResult_TeamsForFixture_Result)">
+          <Parameter Name="FixtureId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueResults_AddResult">
+            <Parameter Name="FixtureRef" Mode="In" Type="Int32" />
+            <Parameter Name="HomeShots" Mode="In" Type="Int32" />
+            <Parameter Name="AwayShots" Mode="In" Type="Int32" />
+            <Parameter Name="ResultId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueResults_AddResultPlayers">
+            <Parameter Name="ResultRef" Mode="In" Type="Int32" />
+            <Parameter Name="RegistrationRef" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueResults_FixturesForLeague" ReturnType="Collection(ClubWorldModel.LeagueResults_FixturesForLeague_Result)">
+          <Parameter Name="LeagueId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueResults_GetFixture" ReturnType="Collection(ClubWorldModel.LeagueResults_GetFixture_Result)">
+          <Parameter Name="FixtureId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ShowBookingsForDay" ReturnType="Collection(ClubWorldModel.ShowBookingsForDay_Result)">
+          <Parameter Name="RequestedDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="VW_League_Details" EntityType="ClubWorldModel.VW_League_Details" />
+          <EntitySet Name="VW_RinkBookings" EntityType="ClubWorldModel.VW_RinkBookings" />
+        </EntityContainer>
+        <ComplexType Name="GetBookingsForDay_Result">
+          <Property Type="Int32" Name="SessionId" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="EndTime" Nullable="false" />
+          <Property Type="Int32" Name="Rink" Nullable="false" />
+          <Property Type="String" Name="DiaryId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="BookedDate" Nullable="true" />
+          <Property Type="Int32" Name="HomeRef" Nullable="true" />
+          <Property Type="String" Name="HomeName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="AwayRef" Nullable="true" />
+          <Property Type="String" Name="AwayName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetFreeRinks_Result">
+          <Property Type="DateTime" Name="AvDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="SessionRef" Nullable="true" />
+          <Property Type="String" Name="DiaryDesc" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="SpareRinks" Nullable="true" />
+          <Property Type="Int32" Name="RinkFlag" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="League_ShowLeagueTable_Result">
+          <Property Type="String" Name="TeamName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Played" Nullable="true" />
+          <Property Type="Int32" Name="Won" Nullable="true" />
+          <Property Type="Int32" Name="Drawn" Nullable="true" />
+          <Property Type="Int32" Name="Lost" Nullable="true" />
+          <Property Type="Int32" Name="ShotsFor" Nullable="true" />
+          <Property Type="Int32" Name="ShotsAgainst" Nullable="true" />
+          <Property Type="Int32" Name="Diff" Nullable="true" />
+          <Property Type="String" Name="Points" Nullable="true" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="LeagueResult_TeamsForFixture_Result">
+          <Property Type="Int32" Name="TeamRef" Nullable="false" />
+          <Property Type="Int32" Name="RegistrationId" Nullable="false" />
+          <Property Type="Int32" Name="PlayerRef" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Forename" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="LeagueResults_FixturesForLeague_Result">
+          <Property Type="Int32" Name="FixtureId" Nullable="false" />
+          <Property Type="Int32" Name="DiaryId" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="BookedDate" Nullable="false" />
+          <Property Type="Int32" Name="HomeTeamRef" Nullable="false" />
+          <Property Type="String" Name="HomeName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="AwayTeamRef" Nullable="false" />
+          <Property Type="String" Name="AwayName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="Completed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LeagueResults_GetFixture_Result">
+          <Property Type="Int32" Name="DiaryRef" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="FixtureFixtureType" Nullable="true" />
+          <Property Type="Int32" Name="FixturePointPerGame" Nullable="true" />
+          <Property Type="Int32" Name="FixturePointsPerRink" Nullable="true" />
+          <Property Type="Int32" Name="FixtureRinksRequired" Nullable="true" />
+          <Property Type="Int32" Name="StdFixtureType" Nullable="false" />
+          <Property Type="Int32" Name="StdPointPerGame" Nullable="false" />
+          <Property Type="Int32" Name="StdPointsPerRink" Nullable="true" />
+          <Property Type="Int32" Name="StdRinksRequired" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ShowBookingsForDay_Result">
+          <Property Type="Int32" Name="SessionId" Nullable="false" />
+          <Property Type="String" Name="Rink1" Nullable="true" MaxLength="203" />
+          <Property Type="String" Name="Rink2" Nullable="true" MaxLength="203" />
+          <Property Type="String" Name="Rink3" Nullable="true" MaxLength="203" />
+          <Property Type="String" Name="Rink4" Nullable="true" MaxLength="203" />
+          <Property Type="String" Name="Rink5" Nullable="true" MaxLength="203" />
+          <Property Type="String" Name="Rink6" Nullable="true" MaxLength="203" />
+          <Property Type="String" Name="Rink7" Nullable="true" MaxLength="203" />
+        </ComplexType>
+        <EntityType Name="VW_League_Details">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="LeagueId" Type="Int32" Nullable="false" />
+          <Property Name="FixtureTypeId" Type="Int32" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LeagueType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RinksPerFixtue" Type="Int32" />
+          <Property Name="PointsPerGame" Type="Int32" />
+          <Property Name="PointsPerRink" Type="Int32" />
+          <Property Name="DisplayColour" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VW_RinkBookings">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="Int32" Nullable="false" />
+          <Property Name="Rink1" Type="Int32" />
+          <Property Name="Rink2" Type="Int32" />
+          <Property Name="Rink3" Type="Int32" />
+          <Property Name="Rink4" Type="Int32" />
+          <Property Name="Rink5" Type="Int32" />
+          <Property Name="Rink6" Type="Int32" />
+          <Property Name="Rink7" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClubWorldModelStoreContainer" CdmEntityContainer="ClubWorldDbContext">
+          <EntitySetMapping Name="App_Config">
+            <EntityTypeMapping TypeName="ClubWorldModel.App_Config">
+              <MappingFragment StoreEntitySet="App_Config">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="App_Members">
+            <EntityTypeMapping TypeName="ClubWorldModel.App_Members">
+              <MappingFragment StoreEntitySet="App_Members">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_Booking_Diary">
+            <EntityTypeMapping TypeName="ClubWorldModel.Audit_Booking_Diary">
+              <MappingFragment StoreEntitySet="Audit_Booking_Diary">
+                <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
+                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PostponedRef" ColumnName="PostponedRef" />
+                <ScalarProperty Name="UserRef" ColumnName="UserRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking_AvailableSessions">
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_AvailableSessions">
+              <MappingFragment StoreEntitySet="Booking_AvailableSessions">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking_Diary">
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_Diary">
+              <MappingFragment StoreEntitySet="Booking_Diary">
+                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PostponedRef" ColumnName="PostponedRef" />
+                <ScalarProperty Name="EntryType" ColumnName="EntryType" />
+                <ScalarProperty Name="UserRef" ColumnName="UserRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking_Integrity">
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_Integrity">
+              <MappingFragment StoreEntitySet="Booking_Integrity">
+                <ScalarProperty Name="IntegrityId" ColumnName="IntegrityId" />
+                <ScalarProperty Name="BookingRef" ColumnName="BookingRef" />
+                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
+                <ScalarProperty Name="TeamRef" ColumnName="TeamRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking_Rink">
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_Rink">
+              <MappingFragment StoreEntitySet="Booking_Rink">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="SessionRef" ColumnName="SessionRef" />
+                <ScalarProperty Name="Rink" ColumnName="Rink" />
+                <ScalarProperty Name="DiaryRef" ColumnName="DiaryRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking_Type">
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_Type">
+              <MappingFragment StoreEntitySet="Booking_Type">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeEnum" ColumnName="TypeEnum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition_Draw">
+            <EntityTypeMapping TypeName="ClubWorldModel.Competition_Draw">
+              <MappingFragment StoreEntitySet="Competition_Draw">
+                <ScalarProperty Name="DrawId" ColumnName="DrawId" />
+                <ScalarProperty Name="CompetitionRef" ColumnName="CompetitionRef" />
+                <ScalarProperty Name="RoundRef" ColumnName="RoundRef" />
+                <ScalarProperty Name="HomeRef" ColumnName="HomeRef" />
+                <ScalarProperty Name="AwayRef" ColumnName="AwayRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition_Entries">
+            <EntityTypeMapping TypeName="ClubWorldModel.Competition_Entries">
+              <MappingFragment StoreEntitySet="Competition_Entries">
+                <ScalarProperty Name="EntrantId" ColumnName="EntrantId" />
+                <ScalarProperty Name="CompetitionRef" ColumnName="CompetitionRef" />
+                <ScalarProperty Name="PlayerRef" ColumnName="PlayerRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition_List">
+            <EntityTypeMapping TypeName="ClubWorldModel.Competition_List">
+              <MappingFragment StoreEntitySet="Competition_List">
+                <ScalarProperty Name="CompetitionId" ColumnName="CompetitionId" />
+                <ScalarProperty Name="CompetitionName" ColumnName="CompetitionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_Fixtures">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_Fixtures">
+              <MappingFragment StoreEntitySet="League_Fixtures">
+                <ScalarProperty Name="FixtureId" ColumnName="FixtureId" />
+                <ScalarProperty Name="DiaryRef" ColumnName="DiaryRef" />
+                <ScalarProperty Name="LeagueRef" ColumnName="LeagueRef" />
+                <ScalarProperty Name="HomeTeamRef" ColumnName="HomeTeamRef" />
+                <ScalarProperty Name="AwayTeamRef" ColumnName="AwayTeamRef" />
+                <ScalarProperty Name="FixtureTypeRef" ColumnName="FixtureTypeRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_FixtureType">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_FixtureType">
+              <MappingFragment StoreEntitySet="League_FixtureType">
+                <ScalarProperty Name="FixtureTypeId" ColumnName="FixtureTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PlayersPerRink" ColumnName="PlayersPerRink" />
+                <ScalarProperty Name="RinksRequired" ColumnName="RinksRequired" />
+                <ScalarProperty Name="PointsPerGame" ColumnName="PointsPerGame" />
+                <ScalarProperty Name="PointsPerRink" ColumnName="PointsPerRink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_List">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_List">
+              <MappingFragment StoreEntitySet="League_List">
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FixtureTypeRef" ColumnName="FixtureTypeRef" />
+                <ScalarProperty Name="DisplayColour" ColumnName="DisplayColour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_RegisteredPlayers">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_RegisteredPlayers">
+              <MappingFragment StoreEntitySet="League_RegisteredPlayers">
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="TeamRef" ColumnName="TeamRef" />
+                <ScalarProperty Name="PlayerRef" ColumnName="PlayerRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_Result">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_Result">
+              <MappingFragment StoreEntitySet="League_Result">
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+                <ScalarProperty Name="FixtureRef" ColumnName="FixtureRef" />
+                <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+                <ScalarProperty Name="HomeShots" ColumnName="HomeShots" />
+                <ScalarProperty Name="AwayShots" ColumnName="AwayShots" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_ResultPlayers">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_ResultPlayers">
+              <MappingFragment StoreEntitySet="League_ResultPlayers">
+                <ScalarProperty Name="ResultPlayerId" ColumnName="ResultPlayerId" />
+                <ScalarProperty Name="ResultRef" ColumnName="ResultRef" />
+                <ScalarProperty Name="RegistrationRef" ColumnName="RegistrationRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_Teams">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_Teams">
+              <MappingFragment StoreEntitySet="League_Teams">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="LeagueRef" ColumnName="LeagueRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition_Rounds">
+            <EntityTypeMapping TypeName="ClubWorldModel.Competition_Rounds">
+              <MappingFragment StoreEntitySet="Competition_Rounds">
+                <ScalarProperty Name="RoundId" ColumnName="RoundId" />
+                <ScalarProperty Name="CompetitionRef" ColumnName="CompetitionRef" />
+                <ScalarProperty Name="RoundTitle" ColumnName="RoundTitle" />
+                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="ClubWorldModel.Store.GenerateCalendar" FunctionImportName="GenerateCalendar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.GenerateCalendar_Result">
+                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
+                <ScalarProperty Name="SeqByWk" ColumnName="SeqByWk" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="YrNN" ColumnName="YrNN" />
+                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="WkDNo" ColumnName="WkDNo" />
+                <ScalarProperty Name="WkDName" ColumnName="WkDName" />
+                <ScalarProperty Name="WkDName2" ColumnName="WkDName2" />
+                <ScalarProperty Name="WkDName3" ColumnName="WkDName3" />
+                <ScalarProperty Name="JulDay" ColumnName="JulDay" />
+                <ScalarProperty Name="JulWk" ColumnName="JulWk" />
+                <ScalarProperty Name="WkNo" ColumnName="WkNo" />
+                <ScalarProperty Name="Qtr" ColumnName="Qtr" />
+                <ScalarProperty Name="Last" ColumnName="Last" />
+                <ScalarProperty Name="LdOfMo" ColumnName="LdOfMo" />
+                <ScalarProperty Name="LDtOfMo" ColumnName="LDtOfMo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddNewFixture" FunctionName="ClubWorldModel.Store.AddNewFixture" />
+          <FunctionImportMapping FunctionImportName="GetBookingsForDay" FunctionName="ClubWorldModel.Store.GetBookingsForDay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.GetBookingsForDay_Result">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Rink" ColumnName="Rink" />
+                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
+                <ScalarProperty Name="HomeRef" ColumnName="HomeRef" />
+                <ScalarProperty Name="HomeName" ColumnName="HomeName" />
+                <ScalarProperty Name="AwayRef" ColumnName="AwayRef" />
+                <ScalarProperty Name="AwayName" ColumnName="AwayName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFreeRinks" FunctionName="ClubWorldModel.Store.GetFreeRinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.GetFreeRinks_Result">
+                <ScalarProperty Name="AvDate" ColumnName="AvDate" />
+                <ScalarProperty Name="SessionRef" ColumnName="SessionRef" />
+                <ScalarProperty Name="DiaryDesc" ColumnName="DiaryDesc" />
+                <ScalarProperty Name="SpareRinks" ColumnName="SpareRinks" />
+                <ScalarProperty Name="RinkFlag" ColumnName="RinkFlag" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRinkBookings" FunctionName="ClubWorldModel.Store.GetRinkBookings" />
+          <FunctionImportMapping FunctionImportName="InsertRinkBooking" FunctionName="ClubWorldModel.Store.InsertRinkBooking" />
+          <FunctionImportMapping FunctionImportName="League_ShowLeagueTable" FunctionName="ClubWorldModel.Store.League_ShowLeagueTable">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.League_ShowLeagueTable_Result">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Played" ColumnName="Played" />
+                <ScalarProperty Name="Won" ColumnName="Won" />
+                <ScalarProperty Name="Drawn" ColumnName="Drawn" />
+                <ScalarProperty Name="Lost" ColumnName="Lost" />
+                <ScalarProperty Name="ShotsFor" ColumnName="ShotsFor" />
+                <ScalarProperty Name="ShotsAgainst" ColumnName="ShotsAgainst" />
+                <ScalarProperty Name="Diff" ColumnName="Diff" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeagueResult_TeamsForFixture" FunctionName="ClubWorldModel.Store.LeagueResult_TeamsForFixture">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.LeagueResult_TeamsForFixture_Result">
+                <ScalarProperty Name="TeamRef" ColumnName="TeamRef" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="PlayerRef" ColumnName="PlayerRef" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeagueResults_AddResult" FunctionName="ClubWorldModel.Store.LeagueResults_AddResult" />
+          <FunctionImportMapping FunctionImportName="LeagueResults_AddResultPlayers" FunctionName="ClubWorldModel.Store.LeagueResults_AddResultPlayers" />
+          <FunctionImportMapping FunctionImportName="LeagueResults_FixturesForLeague" FunctionName="ClubWorldModel.Store.LeagueResults_FixturesForLeague">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.LeagueResults_FixturesForLeague_Result">
+                <ScalarProperty Name="FixtureId" ColumnName="FixtureId" />
+                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
+                <ScalarProperty Name="HomeTeamRef" ColumnName="HomeTeamRef" />
+                <ScalarProperty Name="HomeName" ColumnName="HomeName" />
+                <ScalarProperty Name="AwayTeamRef" ColumnName="AwayTeamRef" />
+                <ScalarProperty Name="AwayName" ColumnName="AwayName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeagueResults_GetFixture" FunctionName="ClubWorldModel.Store.LeagueResults_GetFixture">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.LeagueResults_GetFixture_Result">
+                <ScalarProperty Name="DiaryRef" ColumnName="DiaryRef" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FixtureFixtureType" ColumnName="FixtureFixtureType" />
+                <ScalarProperty Name="FixturePointPerGame" ColumnName="FixturePointPerGame" />
+                <ScalarProperty Name="FixturePointsPerRink" ColumnName="FixturePointsPerRink" />
+                <ScalarProperty Name="FixtureRinksRequired" ColumnName="FixtureRinksRequired" />
+                <ScalarProperty Name="StdFixtureType" ColumnName="StdFixtureType" />
+                <ScalarProperty Name="StdPointPerGame" ColumnName="StdPointPerGame" />
+                <ScalarProperty Name="StdPointsPerRink" ColumnName="StdPointsPerRink" />
+                <ScalarProperty Name="StdRinksRequired" ColumnName="StdRinksRequired" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowBookingsForDay" FunctionName="ClubWorldModel.Store.ShowBookingsForDay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClubWorldModel.ShowBookingsForDay_Result">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="Rink1" ColumnName="Rink1" />
+                <ScalarProperty Name="Rink2" ColumnName="Rink2" />
+                <ScalarProperty Name="Rink3" ColumnName="Rink3" />
+                <ScalarProperty Name="Rink4" ColumnName="Rink4" />
+                <ScalarProperty Name="Rink5" ColumnName="Rink5" />
+                <ScalarProperty Name="Rink6" ColumnName="Rink6" />
+                <ScalarProperty Name="Rink7" ColumnName="Rink7" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="VW_League_Details">
+            <EntityTypeMapping TypeName="ClubWorldModel.VW_League_Details">
+              <MappingFragment StoreEntitySet="VW_League_Details">
+                <ScalarProperty Name="DisplayColour" ColumnName="DisplayColour" />
+                <ScalarProperty Name="PointsPerRink" ColumnName="PointsPerRink" />
+                <ScalarProperty Name="PointsPerGame" ColumnName="PointsPerGame" />
+                <ScalarProperty Name="RinksPerFixtue" ColumnName="RinksPerFixtue" />
+                <ScalarProperty Name="LeagueType" ColumnName="LeagueType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FixtureTypeId" ColumnName="FixtureTypeId" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_RinkBookings">
+            <EntityTypeMapping TypeName="ClubWorldModel.VW_RinkBookings">
+              <MappingFragment StoreEntitySet="VW_RinkBookings">
+                <ScalarProperty Name="Rink7" ColumnName="Rink7" />
+                <ScalarProperty Name="Rink6" ColumnName="Rink6" />
+                <ScalarProperty Name="Rink5" ColumnName="Rink5" />
+                <ScalarProperty Name="Rink4" ColumnName="Rink4" />
+                <ScalarProperty Name="Rink3" ColumnName="Rink3" />
+                <ScalarProperty Name="Rink2" ColumnName="Rink2" />
+                <ScalarProperty Name="Rink1" ColumnName="Rink1" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

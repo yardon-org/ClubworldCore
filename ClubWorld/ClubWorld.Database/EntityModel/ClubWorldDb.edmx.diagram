@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1222972d2fee4f708d05200cc5cb47bc" Name="Diagram1">
+        <EntityTypeShape EntityType="ClubWorldModel.App_Config" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.App_Members" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Audit_Booking_Diary" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Booking_AvailableSessions" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Booking_Diary" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Booking_Integrity" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Booking_Rink" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Booking_Type" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Competition_Draw" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Competition_Entries" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Competition_List" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_Fixtures" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_FixtureType" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_List" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_RegisteredPlayers" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_Result" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_ResultPlayers" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.League_Teams" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubWorldModel.Competition_Rounds" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ClubWorldModel.FK_League_Fixtures_Diary" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubWorldModel.FK_League_Result_League_Fixtures" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubWorldModel.FK_League_Teams_League_List" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubWorldModel.FK_League_RegisteredPlayers_League_Teams" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClubWorldModel.VW_League_Details" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ClubWorldModel.VW_RinkBookings" Width="1.5" PointX="2.75" PointY="11.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

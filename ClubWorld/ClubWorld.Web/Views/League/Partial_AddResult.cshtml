@@ -1,0 +1,85 @@
+﻿@using ClubWorld.Models.League
+@model ClubWorld.Models.League.Results.AddResultViewModel
+
+<div class="ontop">
+    <div><h4>@Model.Details.HomeTeamName</h4></div>
+    @if (Model.FixtureTypeList != null)
+    {
+        <select id="cw-fixture-select" name="SelectedFixType" onchange="cw_FixtureSelect(this.value)">
+            @foreach (LeagueFixtureType ft in @Model.FixtureTypeList)
+            {
+                {
+                    string optId = "cw-fixturetype-" + ft.FixturteTypeId;
+                    <option id="@optId" cw-rinksrequired="@ft.RinksRequired" value="@ft.FixturteTypeId">@ft.Description</option>
+                }
+            }
+        </select>
+    }
+    <div><h4>@Model.Details.AwayTeamName</h4></div>
+</div>
+<div class="results">
+    <div class="cw-playerlist cw-homedrop">
+        <ul id="cw-homeplayers">
+            @foreach (Player p in @Model.HomePlayers)
+            {
+                <li class="cw-homedrag" data-cwplayer='{"Id": "@p.Id", "RegistrationId": "@p.RegistrationId"}'>@p.Name</li>
+            }
+        </ul>
+    </div>
+    <div class="fixture">
+        <div class="rink" id="cw-resultrow-1">
+            <div class="gamelist cw-matchplayers cw-homedrop">
+                <ul class="cw-homedrag" id="cw-homerink-1"></ul>
+            </div>
+            <div class="score">
+                <input id="cw-homescore-1" type="text" maxlength="3" size="3" name="homescore-1">
+            </div>
+            <div class="score">
+                <input id="cw-awayscore-1" type="text" maxlength="3" size="3" name="awayscore-1">
+            </div>
+            <div class="gamelist cw-matchplayers cw-awaydrop">
+                <ul class="cw-awaydrag" id="cw-awayrink-1"></ul>
+            </div>
+        </div>
+        <div class="rink hidden" id="cw-resultrow-2">
+            <div class="gamelist cw-matchplayers cw-homedrop">
+                <ul class="cw-homedrag" id="cw-homerink-2"></ul>
+            </div>
+            <div class="score">
+                <input id="cw-homescore-2" type="text" maxlength="3" size="3" name="homescore-2">
+            </div>
+            <div class="score">
+                <input id="cw-awayscore-2" type="text" maxlength="3" size="3" name="awayscore-2">
+            </div>
+            <div class="gamelist cw-matchplayers cw-awaydrop">
+                <ul class="cw-awaydrag" id="cw-awayrink-2"></ul>
+            </div>
+        </div>
+        <div class="rink hidden" id="cw-resultrow-3">
+            <div class="gamelist cw-matchplayers cw-homedrop">
+                <ul class="cw-homedrag" id="cw-homerink-3"></ul>
+            </div>
+            <div class="score">
+                <input id="cw-homescore-3" type="text" maxlength="3" size="3" name="homescore-3">
+            </div>
+            <div class="score">
+                <input id="cw-awayscore-3" type="text" maxlength="3" size="3" name="awayscore-3">
+            </div>
+            <div class="gamelist  cw-matchplayers cw-awaydrop">
+                <ul class="cw-awaydrag" id="cw-awayrink-3"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="cw-playerlist cw-awaydrop">
+        <ul id="cw-awayplayers">
+            @foreach (Player p in @Model.AwayPlayers)
+            {
+                <li class="cw-awaydrag" data-cwplayer='{"Id": "@p.Id", "RegistrationId": "@p.RegistrationId"}'>@p.Name</li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="buttons">
+    <button id="saveresult" onclick="cw_SaveResult()">Save result</button>
+    <button id="cancelresult" onclick="cw_CancelResult()">Cancel</button>
+</div>

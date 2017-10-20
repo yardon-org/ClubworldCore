@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "League";
+}
+
+<h2>Bowls Leagues</h2>
+            
+<table>
+    <thead>
+        <tr>
+            <td>Name of League</td>
+            <td>Points Per Rink</td>
+            <td>Points for a win</td>
+            <td>Rinks required per game</td>
+        </tr>
+    </thead>
+</table>
+
+<div class="cwinput">
+    <h2>Add New</h2>
+
+    <form action="/LeagueAdmin/AddNew" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <td>Name of League</td>
+                    <td>Points per rink</td>
+                    <td>Points per Win</td>
+                    <td>No. of rinks required</td>
+                </tr>
+            </thead>
+            <tr>
+                <td><input type="text" name="Description" /></td>
+                <td><input type="text" name="PtsPerRink" /></td>
+                <td><input type="text" name="PtsPerWin" /></td>
+                <td><input type="text" name="RinksReqd" /></td>
+            </tr>
+        </table>
+        <input type="submit" name="AddNew" />
+    </form> 
+</div>

@@ -1,0 +1,33 @@
+﻿
+@using ClubWorld.Models.League.Results
+@using ClubWorld.Models.League
+@model ClubWorld.Models.League.Results.ResultViewModel
+
+@section CustomStyle
+{
+    <link rel="stylesheet" href='@Url.Content("/Content/Site/league.css")' type="text/css" />
+}
+
+<div class="leaguecontainer">
+    <div id="header">
+        <h1>Results</h1>
+        <p class="lead">Add results for League</p>
+    </div>
+    <h4>Choose League: </h4><br />
+    <div id="selection">
+        <div id="cw-league">
+            @foreach (LeagueDetails l in Model.LeagueList)
+            {
+                <p id="@l.Id">@l.Name</p>
+            }
+        </div>
+        <div id="cw-resultview">
+        </div>
+    </div>
+    <div id="cw-addresult">
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript" , src="~/Scripts/Site/League.js"></script>
+}

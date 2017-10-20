@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClubWorldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubWorld.ClubWorld.League_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="League_List">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="WinPoints" />
+            <PropertyRef Name="TotalRinksRequired" />
+          </Key>
+          <Property Name="LeagueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="WinPoints" Type="int" Nullable="false" />
+          <Property Name="RinkPoints" Type="int" />
+          <Property Name="TotalRinksRequired" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubWorld.ClubWorld.League_RegisteredPlayers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="League_RegisteredPlayers">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+            <PropertyRef Name="TeamRef" />
+            <PropertyRef Name="PlayerRef" />
+          </Key>
+          <Property Name="RegistrationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamRef" Type="int" Nullable="false" />
+          <Property Name="PlayerRef" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="int" Nullable="false" />
+          <Property Name="FixtureRef" Type="int" Nullable="false" />
+          <Property Name="ResultType" Type="int" Nullable="false" />
+          <Property Name="HomeFor" Type="int" Nullable="false" />
+          <Property Name="AwayShots" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LeagueRef" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="League_List_DEL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="LeagueID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="League_List_INS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="WinPoints" Type="int" Mode="In" />
+          <Parameter Name="RinkPoints" Type="int" Mode="In" />
+          <Parameter Name="TotalRinksRequired" Type="int" Mode="In" />
+        </Function>
+        <Function Name="League_List_UPD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="LeagueID" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="WinPoints" Type="int" Mode="In" />
+          <Parameter Name="RinkPoints" Type="int" Mode="In" />
+          <Parameter Name="TotalRinksRequired" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueTeams_DEL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueTeams_INS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="TeamName" Type="varchar" Mode="In" />
+          <Parameter Name="LeagueRef" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeagueTeams_UPD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ClubWorld">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+          <Parameter Name="TeamName" Type="varchar" Mode="In" />
+          <Parameter Name="LeagueRef" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ClubWorldModelStoreContainer">
+          <EntitySet Name="League_Result" EntityType="Self.League_Result" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_Teams" EntityType="Self.League_Teams" Schema="ClubWorld" store:Type="Tables" />
+          <EntitySet Name="League_List" EntityType="Self.League_List" store:Type="Tables" store:Schema="ClubWorld">
+            <DefiningQuery>SELECT 
+    [League_List].[LeagueId] AS [LeagueId], 
+    [League_List].[Description] AS [Description], 
+    [League_List].[WinPoints] AS [WinPoints], 
+    [League_List].[RinkPoints] AS [RinkPoints], 
+    [League_List].[TotalRinksRequired] AS [TotalRinksRequired]
+    FROM [ClubWorld].[League_List] AS [League_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="League_RegisteredPlayers" EntityType="Self.League_RegisteredPlayers" store:Type="Tables" store:Schema="ClubWorld">
+            <DefiningQuery>SELECT 
+    [League_RegisteredPlayers].[RegistrationId] AS [RegistrationId], 
+    [League_RegisteredPlayers].[TeamRef] AS [TeamRef], 
+    [League_RegisteredPlayers].[PlayerRef] AS [PlayerRef]
+    FROM [ClubWorld].[League_RegisteredPlayers] AS [League_RegisteredPlayers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClubWorldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="League_Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" />
+          <Property Name="FixtureRef" Type="Int32" Nullable="false" />
+          <Property Name="ResultType" Type="Int32" Nullable="false" />
+          <Property Name="HomeFor" Type="Int32" Nullable="false" />
+          <Property Name="AwayShots" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LeagueRef" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_List">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="WinPoints" />
+            <PropertyRef Name="TotalRinksRequired" />
+          </Key>
+          <Property Name="LeagueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="WinPoints" Type="Int32" Nullable="false" />
+          <Property Name="RinkPoints" Type="Int32" />
+          <Property Name="TotalRinksRequired" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="League_RegisteredPlayers">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+            <PropertyRef Name="TeamRef" />
+            <PropertyRef Name="PlayerRef" />
+          </Key>
+          <Property Name="RegistrationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamRef" Type="Int32" Nullable="false" />
+          <Property Name="PlayerRef" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ClubWorldEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="League_Result" EntityType="Self.League_Result" />
+          <EntitySet Name="League_Teams" EntityType="Self.League_Teams" />
+          <EntitySet Name="League_List" EntityType="Self.League_List" />
+          <EntitySet Name="League_RegisteredPlayers" EntityType="Self.League_RegisteredPlayers" />
+          <FunctionImport Name="League_List_DEL">
+            <Parameter Name="LeagueID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="League_List_INS">
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="WinPoints" Mode="In" Type="Int32" />
+            <Parameter Name="RinkPoints" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRinksRequired" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="League_List_UPD">
+            <Parameter Name="LeagueID" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="WinPoints" Mode="In" Type="Int32" />
+            <Parameter Name="RinkPoints" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRinksRequired" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueTeams_DEL">
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueTeams_INS">
+            <Parameter Name="TeamName" Mode="In" Type="String" />
+            <Parameter Name="LeagueRef" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeagueTeams_UPD">
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+            <Parameter Name="TeamName" Mode="In" Type="String" />
+            <Parameter Name="LeagueRef" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClubWorldModelStoreContainer" CdmEntityContainer="ClubWorldEntities">
+          <EntitySetMapping Name="League_Result">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_Result">
+              <MappingFragment StoreEntitySet="League_Result">
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+                <ScalarProperty Name="FixtureRef" ColumnName="FixtureRef" />
+                <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+                <ScalarProperty Name="HomeFor" ColumnName="HomeFor" />
+                <ScalarProperty Name="AwayShots" ColumnName="AwayShots" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_Teams">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_Teams">
+              <MappingFragment StoreEntitySet="League_Teams">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="LeagueRef" ColumnName="LeagueRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_List">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_List">
+              <MappingFragment StoreEntitySet="League_List">
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WinPoints" ColumnName="WinPoints" />
+                <ScalarProperty Name="RinkPoints" ColumnName="RinkPoints" />
+                <ScalarProperty Name="TotalRinksRequired" ColumnName="TotalRinksRequired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="League_RegisteredPlayers">
+            <EntityTypeMapping TypeName="ClubWorldModel.League_RegisteredPlayers">
+              <MappingFragment StoreEntitySet="League_RegisteredPlayers">
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="TeamRef" ColumnName="TeamRef" />
+                <ScalarProperty Name="PlayerRef" ColumnName="PlayerRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="League_List_DEL" FunctionName="ClubWorldModel.Store.League_List_DEL" />
+          <FunctionImportMapping FunctionImportName="League_List_INS" FunctionName="ClubWorldModel.Store.League_List_INS" />
+          <FunctionImportMapping FunctionImportName="League_List_UPD" FunctionName="ClubWorldModel.Store.League_List_UPD" />
+          <FunctionImportMapping FunctionImportName="LeagueTeams_DEL" FunctionName="ClubWorldModel.Store.LeagueTeams_DEL" />
+          <FunctionImportMapping FunctionImportName="LeagueTeams_INS" FunctionName="ClubWorldModel.Store.LeagueTeams_INS" />
+          <FunctionImportMapping FunctionImportName="LeagueTeams_UPD" FunctionName="ClubWorldModel.Store.LeagueTeams_UPD" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

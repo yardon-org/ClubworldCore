@@ -1,0 +1,18 @@
+﻿@using ClubWorld.Models.LeagueResults
+@using Newtonsoft.Json
+@model ClubWorld.Models.LeagueResults.ResultViewModel
+
+<div>
+    <h4>@Model.LeagueName</h4>
+        @foreach (Fixture f in @Model.Fixtures)
+        {
+        <div data-cw-fixture="@JsonConvert.SerializeObject(f)">
+        @*.ToString(@"ddd dd MMM yyyy")<div cw-fixtureid="@f.FixtureId" cw-homeref="@f.HomeRef" cw-homename="@f.HomeTeam" cw-awayref="@f.AwayRef" cw-awayname="@f.AwayTeam" cw-date="@f.BookedDate" cw-diaryid="@f.DiaryRef">*@
+
+            <div class="col-md-4" cw-striped>@f.BookedDate</div>
+            <div class="col-md-3">@f.HomeTeamName</div>
+            <div class="col-md-1"> v </div>
+            <div class="col-md-3">@f.AwayTeamName</div>
+        </div>
+    }
+</div>

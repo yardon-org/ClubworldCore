@@ -1,0 +1,101 @@
+﻿/*.leaguecontainer {
+    display: flex;
+    flex-direction: column;
+}*/
+.pagecontainer {
+    display: flex;
+    flex-direction: row;
+}
+#section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#leaguedata {
+    display: flex;
+    flex-direction: column;
+}
+.ontop {
+    display: flex;
+    justify-content: space-between;
+    height: 35px;
+}
+.results {
+    display: flex;
+    height: 250px;
+    justify-content: space-between;
+}
+.playerlist {
+    width: 18%;
+    border: 1px solid black;
+    padding: 0;  
+}
+.fixture {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 10px;
+    width: 33%;
+    justify-content: space-around;
+}
+.cw-matchplayers {
+    width: 30%;
+    min-height: 70px;
+    border: 1px solid black;
+    padding: 1px;
+    }
+.rink {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+}
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+#selection {
+    display: flex;
+    width: 50%;
+    /*justify-content: space-between;*/
+}
+#cw-league {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    width: 20%;
+}
+#cw-resultview {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+#cw-addresult {
+    padding-top: 10px;
+    width: 65%;
+}
+#cw-table {
+    display: flex;
+    padding-left: 40px;
+}
+.cw-tabledate {
+    width: 35%;
+}
+.cw-tableteam {
+    width: 22%;
+}
+.cw-tableversus {
+    width: 7%;
+}
+#cw-leaguetable {
+    padding-left: 50px;
+}
+.cw-menuhorizontal {
+    display: flex;
+    flex-direction: row;
+    padding-left: 40px;
+}
+.cw-menuhorizontal li {
+    padding: 10px;
+}

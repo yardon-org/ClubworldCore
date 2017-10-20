@@ -1,0 +1,65 @@
+﻿@using ClubWorld.Models.Shared;
+@model ClubWorld.Models.Leagues.LeagueEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@Model.LeagueName</h2>
+
+<div class="container">
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-3">
+            <select class="selectpicker" multiple="" name="session" tabindex="-98">
+                @foreach (AvailableSession sess in @Model.Sessions)
+                {
+                    <option value="@sess.Id">@sess.StartingAt.ToString(@"hh\:mm") - @sess.EndingAfter.ToString(@"hh\:mm")</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="selectpicker" multiple name="DaysSelected">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input id="fixture-start" name ="StartDate" type="text" data-date-format="dd/mm/yyyy" data-provide="datepicker" data-date-autoclose="true" class="form-control date" value="01/10/2013" />
+            <input name="Repeats" type="number" value="2" />
+        </div>
+        <div class="col-md-3">
+            <input type="hidden" name="LeagueId" value="@Model.LeagueId" />
+            <input class="btn btn-primary" type="submit" value="Create Fixtures" />
+        </div>
+    </div>
+ }   
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Teams)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

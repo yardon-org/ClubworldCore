@@ -1,0 +1,49 @@
+﻿@model ClubWorld.Models.Booking.ViewModels.ShowDayViewModel
+@{
+    ViewBag.Title = "Club World Home";
+}
+@section Scripts {
+<script>
+    $(function () {
+        $('[cw-homename]').tooltip();
+    })
+    $(function () {
+        $('#datepicker').datepicker({
+            dateFormat: "dd-mm-yy",
+            defaultDate: "01-10-2013",
+            onSelect: function () {
+                $('datepicker').datepicker().hide();
+            }
+        })
+    })
+</script>
+}
+<div class="jumbotron">
+    <h1>ClubWorld Fixture Manager</h1>
+    <p class="lead">Manage leagues, competitions and rink booking online</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">MVC Test App &raquo;</a></p>
+</div>
+
+
+@Html.Partial("_RinkSheetPartial")
+<div class="row">
+    <div class="col-md-4">
+        <h2>League Administration</h2>
+        <p>
+            Set Up league Id's, Add teams and create fixture lists
+        </p>
+        <p>@Html.ActionLink("Players", "Player","AdminLeague")</p>
+        <p>@Html.ActionLink("Teams", "Team", "AdminLeague")</p>
+        <p>@Html.ActionLink("Leagues", "League", "AdminLeague")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using ClubWorld.Models.Booking;
+@model ClubWorld.Models.Booking.ViewModels.ShowDayViewModel
+
+
+
+<h4><strong>Fixtures for: @Model.ViewDate.ToString(@"ddd dd MMM yyyy")</strong></h4>
+<table cw-date="@Model.ViewDate.ToString(@"yyyy-MM-dd")" class="table-striped table-hover table-bordered" id="selectable">
+    <tr>
+        <td>Session</td>
+        <td>Rink 1</td>
+        <td>Rink 2</td>
+        <td>Rink 3</td>
+        <td>Rink 4</td>
+        <td>Rink 5</td>
+        <td>Rink 6</td>
+        <td>Rink 7</td>
+    </tr>
+    @foreach (Session ses in @Model.SessionList)
+    {
+        <tr>
+            <td>@ses.SessionId</td>
+            @foreach (RinkUnit unit in ses.session)
+            {
+                <td class="@unit.Free" cw-bookingid="@ses.SessionId:@unit.Rink" cw-diary="@unit.DiaryRef" cw-homename="@unit.HomeName" cw-awayname="@unit.AwayName" title="@unit.Tooltip">@unit.Fixture</td>
+            }
+
+        </tr>
+    }
+
+</table>

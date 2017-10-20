@@ -1,0 +1,84 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+td {
+    padding: 10px;
+}
+#RinkBooking tr td{
+    width: 12%;
+}
+.ui-tooltip {
+    white-space: pre-line;
+}
+.ui-selecting {
+    background: #FECA40;
+}
+.ui-selected {
+    background: #F39814; color: white;
+
+}
+div.cw-striped:nth-child(even), p.cw-striped:nth-child(even) {
+    background-color: #CCC;
+}
+#cw-league>p {
+    cursor: pointer;
+}
+#cw-league>p:hover {
+    color: red;
+}
+ #cw-resultview>div>div:hover {
+     color: red;
+ }
+ #cw-resultview>div>div {
+     cursor: pointer;
+ }
+
+ .cw-playerlist, .cw-matchplayers {
+     padding: 0px;
+     padding-left: 10px;
+     white-space: nowrap;
+ }
+ ul {
+     list-style-type: none;
+     list-style: none;
+     padding 0px;
+     padding-left: 0px;
+ }
+ div.cw-vertical {
+     min-height: 65px;
+     display: flex;
+     align-items: center;
+ }
+ .highlight {
+     background-color: green;
+ }
+ .cw-menuhorizontal>li:hover {
+     cursor: pointer;
+     color: green;
+     background-color: lightgoldenrodyellow;
+ }
+ .cw-selected {
+     color: green;
+     background-color: lightgoldenrodyellow;
+}

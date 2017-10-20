@@ -1,0 +1,30 @@
+﻿@model ClubWorld.Views.AdminLeague.LeagueViewModel
+
+<div class="jumbotron">
+    <h1>ClubWorld Fixture Manager</h1>
+    <p class="lead">Manage leagues, competitions and rink booking online</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">MVC Test App &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Players</h2>
+        <p>
+            Add, Edit or Remove eligble players
+        </p>
+        <p>@Html.ActionLink("Players", "Administer")</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Team</h2>
+        <p>Set up Teams, assign players and add to League</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Fixtures</h2>
+        <p>Create fixture Lists etc.</p>
+        @Html.DropDownListFor(m => m.SelectedLeague, Model.LeagueSelectList);
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+

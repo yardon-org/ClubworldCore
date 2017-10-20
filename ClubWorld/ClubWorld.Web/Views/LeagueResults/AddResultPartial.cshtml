@@ -1,0 +1,131 @@
+﻿@using ClubWorld.Models.Leagues
+@using ClubWorld.Models.LeagueResults
+@model ClubWorld.Models.LeagueResults.AddResultViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            @if (Model.FixtureTypeList != null)
+                            {
+                                <select id="cw-fixture-select" name="SelectedFixType" onchange="cw_FixtureSelect(this.value)">
+                                    @foreach (FixtureType ft in @Model.FixtureTypeList)
+                                    {
+                                        {
+                                        string optId = "cw-fixturetype-" + ft.FixturteTypeId;
+                                        <option id="@optId" cw-rinksrequired="@ft.RinksRequired" value="@ft.FixturteTypeId">@ft.Description</option>
+                                        }
+                                    }
+                                </select>
+                            }
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 text-center">
+                            <h4>@Model.Details.HomeTeamName</h4>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h4>@Model.Details.AwayTeamName</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-2 well cw-playerlist cw-homedrop">
+                            <ul id="cw-homeplayers">
+                                @foreach (Player p in @Model.HomePlayers)
+                                {
+                                    <li class="cw-homedrag" data-cwplayer='{"Id": "@p.Id", "RegistrationId": "@p.RegistrationId"}'>@p.Name</li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row" id="cw-resultrow-1">
+                                <div class="col-md-12">
+                                    <div class="col-md-4 well cw-matchplayers cw-homedrop">
+                                        <ul class="cw-homedrag" id="cw-homerink-1"></ul>
+                                    </div>
+                                    <div class="col-md-2 cw-vertical">
+                                        <input id="cw-homescore-1" size="3" maxlength="3" name="homescore-1" />
+                                    </div>
+                                    <div class="col-md-2 cw-vertical">
+                                        <input id="cw-awayscore-1" size="3" maxlength="3" name="awayscore-1" />
+                                    </div>
+                                    <div class="col-md-4 well cw-matchplayers cw-awaydrop">
+                                        <ul class="cw-awaydrag" id="cw-awayrink-1"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row hidden" id="cw-resultrow-2">
+                                <div class="col-md-12">
+                                    <div class="col-md-4 well cw-matchplayers cw-homedrop">
+                                        <ul class="cw-homedrag" id="cw-homerink-2"></ul>
+                                    </div>
+                                    <div class="col-md-2 cw-vertical">
+                                        <input id="cw-homescore-2" size="3" maxlength="3" name="homescore-2" />
+                                    </div>
+                                    <div class="col-md-2 cw-vertical">
+                                        <input id="cw-awayscore-2" size="3" maxlength="3" name="awayscore-2" />
+                                    </div>
+                                    <div class="col-md-4 well cw-matchplayers cw-awaydrop">
+                                        <ul class="cw-awaydrag" id="cw-awayrink-2"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row hidden" id="cw-resultrow-3">
+                                <div class="col-md-12">
+                                    <div class="col-md-4 well cw-matchplayers cw-homedrop">
+                                        <ul class="cw-homedrag" id="cw-homerink-3"></ul>
+                                    </div>
+                                    <div class="col-md-2 cw-vertical">
+                                        <input id="cw-homescore-3" size="3" maxlength="3" name="homescore-3" />
+                                    </div>
+                                    <div class="col-md-2 cw-vertical">
+                                        <input id="cw-awayscore-3" size="3" maxlength="3" name="awayscore-3" />
+                                    </div>
+                                    <div class="col-md-4 well cw-matchplayers cw-awaydrop">
+                                        <ul class="cw-awaydrag" id="cw-awayrink-3"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 well cw-playerlist cw-awaydrop">
+                            <ul id="cw-awayplayers">
+                                @foreach (Player p in @Model.AwayPlayers)
+                                {
+                                    <li class="cw-awaydrag" data-cwplayer='{"Id": "@p.Id", "RegistrationId": "@p.RegistrationId"}'>@p.Name</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-4 text-center">
+                            <button class="pull-left" id="saveresult" onclick="cw_SaveResult()">Save result</button>
+                            <button class="pull-right" id="cancelresult" onclick="cw_CancelResult()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
