@@ -422,27 +422,6 @@ warning 6002: The table/view 'ClubWorld.ClubWorld.VW_RinkBookings' does not have
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClubWorldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <ComplexType Name="GenerateCalendar_Result">
-          <Property Name="SeqNo" Type="Int64" />
-          <Property Name="SeqByWk" Type="Int64" />
-          <Property Name="Date" Type="DateTime" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="YrNN" Type="Int32" />
-          <Property Name="YYYYMM" Type="Int32" />
-          <Property Name="Month" Type="Int32" />
-          <Property Name="Day" Type="Int32" />
-          <Property Name="WkDNo" Type="Int32" />
-          <Property Name="WkDName" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
-          <Property Name="WkDName2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="WkDName3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="JulDay" Type="Int32" />
-          <Property Name="JulWk" Type="Int32" />
-          <Property Name="WkNo" Type="Int32" />
-          <Property Name="Qtr" Type="Int32" />
-          <Property Name="Last" Type="Int32" />
-          <Property Name="LdOfMo" Type="Int32" />
-          <Property Name="LDtOfMo" Type="DateTime" />
-        </ComplexType>
         <EntityType Name="App_Config">
           <Key>
             <PropertyRef Name="Id" />
@@ -714,141 +693,9 @@ warning 6002: The table/view 'ClubWorld.ClubWorld.VW_RinkBookings' does not have
             <End Role="League_Teams" EntitySet="League_Teams" />
             <End Role="League_RegisteredPlayers" EntitySet="League_RegisteredPlayers" />
           </AssociationSet>
-          <FunctionImport Name="GenerateCalendar" IsComposable="true" ReturnType="Collection(ClubWorldModel.GenerateCalendar_Result)">
-            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
-            <Parameter Name="NoDays" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="AddNewFixture">
-            <Parameter Name="Desc" Mode="In" Type="String" />
-            <Parameter Name="Booked" Mode="In" Type="DateTime" />
-            <Parameter Name="Type" Mode="In" Type="Int32" />
-            <Parameter Name="RinkFlag" Mode="In" Type="Int32" />
-            <Parameter Name="Session" Mode="In" Type="Int32" />
-            <Parameter Name="LeagueId" Mode="In" Type="Int32" />
-            <Parameter Name="HomeTeam" Mode="In" Type="Int32" />
-            <Parameter Name="AwayTeam" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetBookingsForDay" ReturnType="Collection(ClubWorldModel.GetBookingsForDay_Result)">
-          <Parameter Name="DateRequired" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="GetFreeRinks" ReturnType="Collection(ClubWorldModel.GetFreeRinks_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="SessionFlag" Mode="In" Type="Int32" />
-            <Parameter Name="DayFlag" Mode="In" Type="Int32" />
-            <Parameter Name="AltWeeks" Mode="In" Type="Int32" />
-            <Parameter Name="MinFree" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetRinkBookings">
-          <Parameter Name="BookingDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="InsertRinkBooking">
-            <Parameter Name="Desc" Mode="In" Type="String" />
-            <Parameter Name="Booked" Mode="In" Type="DateTime" />
-            <Parameter Name="Status" Mode="In" Type="Int32" />
-            <Parameter Name="EntryType" Mode="In" Type="Int32" />
-            <Parameter Name="Rink" Mode="In" Type="Int32" />
-            <Parameter Name="Session" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="League_ShowLeagueTable" ReturnType="Collection(ClubWorldModel.League_ShowLeagueTable_Result)">
-          <Parameter Name="LeagueID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LeagueResult_TeamsForFixture" ReturnType="Collection(ClubWorldModel.LeagueResult_TeamsForFixture_Result)">
-          <Parameter Name="FixtureId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LeagueResults_AddResult">
-            <Parameter Name="FixtureRef" Mode="In" Type="Int32" />
-            <Parameter Name="HomeShots" Mode="In" Type="Int32" />
-            <Parameter Name="AwayShots" Mode="In" Type="Int32" />
-            <Parameter Name="ResultId" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LeagueResults_AddResultPlayers">
-            <Parameter Name="ResultRef" Mode="In" Type="Int32" />
-            <Parameter Name="RegistrationRef" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LeagueResults_FixturesForLeague" ReturnType="Collection(ClubWorldModel.LeagueResults_FixturesForLeague_Result)">
-          <Parameter Name="LeagueId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LeagueResults_GetFixture" ReturnType="Collection(ClubWorldModel.LeagueResults_GetFixture_Result)">
-          <Parameter Name="FixtureId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ShowBookingsForDay" ReturnType="Collection(ClubWorldModel.ShowBookingsForDay_Result)">
-          <Parameter Name="RequestedDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="VW_League_Details" EntityType="ClubWorldModel.VW_League_Details" />
           <EntitySet Name="VW_RinkBookings" EntityType="ClubWorldModel.VW_RinkBookings" />
         </EntityContainer>
-        <ComplexType Name="GetBookingsForDay_Result">
-          <Property Type="Int32" Name="SessionId" Nullable="false" />
-          <Property Type="Time" Name="StartTime" Nullable="false" />
-          <Property Type="Time" Name="EndTime" Nullable="false" />
-          <Property Type="Int32" Name="Rink" Nullable="false" />
-          <Property Type="String" Name="DiaryId" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="BookedDate" Nullable="true" />
-          <Property Type="Int32" Name="HomeRef" Nullable="true" />
-          <Property Type="String" Name="HomeName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="AwayRef" Nullable="true" />
-          <Property Type="String" Name="AwayName" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="GetFreeRinks_Result">
-          <Property Type="DateTime" Name="AvDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="SessionRef" Nullable="true" />
-          <Property Type="String" Name="DiaryDesc" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="SpareRinks" Nullable="true" />
-          <Property Type="Int32" Name="RinkFlag" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="League_ShowLeagueTable_Result">
-          <Property Type="String" Name="TeamName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Played" Nullable="true" />
-          <Property Type="Int32" Name="Won" Nullable="true" />
-          <Property Type="Int32" Name="Drawn" Nullable="true" />
-          <Property Type="Int32" Name="Lost" Nullable="true" />
-          <Property Type="Int32" Name="ShotsFor" Nullable="true" />
-          <Property Type="Int32" Name="ShotsAgainst" Nullable="true" />
-          <Property Type="Int32" Name="Diff" Nullable="true" />
-          <Property Type="String" Name="Points" Nullable="true" MaxLength="5" />
-        </ComplexType>
-        <ComplexType Name="LeagueResult_TeamsForFixture_Result">
-          <Property Type="Int32" Name="TeamRef" Nullable="false" />
-          <Property Type="Int32" Name="RegistrationId" Nullable="false" />
-          <Property Type="Int32" Name="PlayerRef" Nullable="false" />
-          <Property Type="String" Name="Surname" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Forename" Nullable="false" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="LeagueResults_FixturesForLeague_Result">
-          <Property Type="Int32" Name="FixtureId" Nullable="false" />
-          <Property Type="Int32" Name="DiaryId" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="BookedDate" Nullable="false" />
-          <Property Type="Int32" Name="HomeTeamRef" Nullable="false" />
-          <Property Type="String" Name="HomeName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="AwayTeamRef" Nullable="false" />
-          <Property Type="String" Name="AwayName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Status" Nullable="true" />
-          <Property Type="Int32" Name="Completed" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="LeagueResults_GetFixture_Result">
-          <Property Type="Int32" Name="DiaryRef" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="FixtureFixtureType" Nullable="true" />
-          <Property Type="Int32" Name="FixturePointPerGame" Nullable="true" />
-          <Property Type="Int32" Name="FixturePointsPerRink" Nullable="true" />
-          <Property Type="Int32" Name="FixtureRinksRequired" Nullable="true" />
-          <Property Type="Int32" Name="StdFixtureType" Nullable="false" />
-          <Property Type="Int32" Name="StdPointPerGame" Nullable="false" />
-          <Property Type="Int32" Name="StdPointsPerRink" Nullable="true" />
-          <Property Type="Int32" Name="StdRinksRequired" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="ShowBookingsForDay_Result">
-          <Property Type="Int32" Name="SessionId" Nullable="false" />
-          <Property Type="String" Name="Rink1" Nullable="true" MaxLength="203" />
-          <Property Type="String" Name="Rink2" Nullable="true" MaxLength="203" />
-          <Property Type="String" Name="Rink3" Nullable="true" MaxLength="203" />
-          <Property Type="String" Name="Rink4" Nullable="true" MaxLength="203" />
-          <Property Type="String" Name="Rink5" Nullable="true" MaxLength="203" />
-          <Property Type="String" Name="Rink6" Nullable="true" MaxLength="203" />
-          <Property Type="String" Name="Rink7" Nullable="true" MaxLength="203" />
-        </ComplexType>
         <EntityType Name="VW_League_Details">
           <Key>
             <PropertyRef Name="LeagueId" />
@@ -938,6 +785,16 @@ warning 6002: The table/view 'ClubWorld.ClubWorld.VW_RinkBookings' does not have
                 <ScalarProperty Name="UserRef" ColumnName="UserRef" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_Diary">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="ClubWorldModel.Store.InsertRinkBooking">
+                  <ScalarProperty Name="BookedDate" ParameterName="Booked" />
+                  <ScalarProperty Name="Description" ParameterName="Desc" />
+                  <ScalarProperty Name="EntryType" ParameterName="EntryType" />
+                  <ScalarProperty Name="Status" ParameterName="Status" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Booking_Integrity">
             <EntityTypeMapping TypeName="ClubWorldModel.Booking_Integrity">
@@ -957,6 +814,14 @@ warning 6002: The table/view 'ClubWorld.ClubWorld.VW_RinkBookings' does not have
                 <ScalarProperty Name="Rink" ColumnName="Rink" />
                 <ScalarProperty Name="DiaryRef" ColumnName="DiaryRef" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="ClubWorldModel.Booking_Rink">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="ClubWorldModel.Store.InsertRinkBooking">
+                  <ScalarProperty Name="SessionRef" ParameterName="Session" />
+                  <ScalarProperty Name="Rink" ParameterName="Rink" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Booking_Type">
@@ -1077,136 +942,6 @@ warning 6002: The table/view 'ClubWorld.ClubWorld.VW_RinkBookings' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionName="ClubWorldModel.Store.GenerateCalendar" FunctionImportName="GenerateCalendar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.GenerateCalendar_Result">
-                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
-                <ScalarProperty Name="SeqByWk" ColumnName="SeqByWk" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="YrNN" ColumnName="YrNN" />
-                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="WkDNo" ColumnName="WkDNo" />
-                <ScalarProperty Name="WkDName" ColumnName="WkDName" />
-                <ScalarProperty Name="WkDName2" ColumnName="WkDName2" />
-                <ScalarProperty Name="WkDName3" ColumnName="WkDName3" />
-                <ScalarProperty Name="JulDay" ColumnName="JulDay" />
-                <ScalarProperty Name="JulWk" ColumnName="JulWk" />
-                <ScalarProperty Name="WkNo" ColumnName="WkNo" />
-                <ScalarProperty Name="Qtr" ColumnName="Qtr" />
-                <ScalarProperty Name="Last" ColumnName="Last" />
-                <ScalarProperty Name="LdOfMo" ColumnName="LdOfMo" />
-                <ScalarProperty Name="LDtOfMo" ColumnName="LDtOfMo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="AddNewFixture" FunctionName="ClubWorldModel.Store.AddNewFixture" />
-          <FunctionImportMapping FunctionImportName="GetBookingsForDay" FunctionName="ClubWorldModel.Store.GetBookingsForDay">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.GetBookingsForDay_Result">
-                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="Rink" ColumnName="Rink" />
-                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
-                <ScalarProperty Name="HomeRef" ColumnName="HomeRef" />
-                <ScalarProperty Name="HomeName" ColumnName="HomeName" />
-                <ScalarProperty Name="AwayRef" ColumnName="AwayRef" />
-                <ScalarProperty Name="AwayName" ColumnName="AwayName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetFreeRinks" FunctionName="ClubWorldModel.Store.GetFreeRinks">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.GetFreeRinks_Result">
-                <ScalarProperty Name="AvDate" ColumnName="AvDate" />
-                <ScalarProperty Name="SessionRef" ColumnName="SessionRef" />
-                <ScalarProperty Name="DiaryDesc" ColumnName="DiaryDesc" />
-                <ScalarProperty Name="SpareRinks" ColumnName="SpareRinks" />
-                <ScalarProperty Name="RinkFlag" ColumnName="RinkFlag" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetRinkBookings" FunctionName="ClubWorldModel.Store.GetRinkBookings" />
-          <FunctionImportMapping FunctionImportName="InsertRinkBooking" FunctionName="ClubWorldModel.Store.InsertRinkBooking" />
-          <FunctionImportMapping FunctionImportName="League_ShowLeagueTable" FunctionName="ClubWorldModel.Store.League_ShowLeagueTable">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.League_ShowLeagueTable_Result">
-                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="Played" ColumnName="Played" />
-                <ScalarProperty Name="Won" ColumnName="Won" />
-                <ScalarProperty Name="Drawn" ColumnName="Drawn" />
-                <ScalarProperty Name="Lost" ColumnName="Lost" />
-                <ScalarProperty Name="ShotsFor" ColumnName="ShotsFor" />
-                <ScalarProperty Name="ShotsAgainst" ColumnName="ShotsAgainst" />
-                <ScalarProperty Name="Diff" ColumnName="Diff" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LeagueResult_TeamsForFixture" FunctionName="ClubWorldModel.Store.LeagueResult_TeamsForFixture">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.LeagueResult_TeamsForFixture_Result">
-                <ScalarProperty Name="TeamRef" ColumnName="TeamRef" />
-                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
-                <ScalarProperty Name="PlayerRef" ColumnName="PlayerRef" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Forename" ColumnName="Forename" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LeagueResults_AddResult" FunctionName="ClubWorldModel.Store.LeagueResults_AddResult" />
-          <FunctionImportMapping FunctionImportName="LeagueResults_AddResultPlayers" FunctionName="ClubWorldModel.Store.LeagueResults_AddResultPlayers" />
-          <FunctionImportMapping FunctionImportName="LeagueResults_FixturesForLeague" FunctionName="ClubWorldModel.Store.LeagueResults_FixturesForLeague">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.LeagueResults_FixturesForLeague_Result">
-                <ScalarProperty Name="FixtureId" ColumnName="FixtureId" />
-                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
-                <ScalarProperty Name="HomeTeamRef" ColumnName="HomeTeamRef" />
-                <ScalarProperty Name="HomeName" ColumnName="HomeName" />
-                <ScalarProperty Name="AwayTeamRef" ColumnName="AwayTeamRef" />
-                <ScalarProperty Name="AwayName" ColumnName="AwayName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Completed" ColumnName="Completed" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LeagueResults_GetFixture" FunctionName="ClubWorldModel.Store.LeagueResults_GetFixture">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.LeagueResults_GetFixture_Result">
-                <ScalarProperty Name="DiaryRef" ColumnName="DiaryRef" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="FixtureFixtureType" ColumnName="FixtureFixtureType" />
-                <ScalarProperty Name="FixturePointPerGame" ColumnName="FixturePointPerGame" />
-                <ScalarProperty Name="FixturePointsPerRink" ColumnName="FixturePointsPerRink" />
-                <ScalarProperty Name="FixtureRinksRequired" ColumnName="FixtureRinksRequired" />
-                <ScalarProperty Name="StdFixtureType" ColumnName="StdFixtureType" />
-                <ScalarProperty Name="StdPointPerGame" ColumnName="StdPointPerGame" />
-                <ScalarProperty Name="StdPointsPerRink" ColumnName="StdPointsPerRink" />
-                <ScalarProperty Name="StdRinksRequired" ColumnName="StdRinksRequired" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ShowBookingsForDay" FunctionName="ClubWorldModel.Store.ShowBookingsForDay">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClubWorldModel.ShowBookingsForDay_Result">
-                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
-                <ScalarProperty Name="Rink1" ColumnName="Rink1" />
-                <ScalarProperty Name="Rink2" ColumnName="Rink2" />
-                <ScalarProperty Name="Rink3" ColumnName="Rink3" />
-                <ScalarProperty Name="Rink4" ColumnName="Rink4" />
-                <ScalarProperty Name="Rink5" ColumnName="Rink5" />
-                <ScalarProperty Name="Rink6" ColumnName="Rink6" />
-                <ScalarProperty Name="Rink7" ColumnName="Rink7" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VW_League_Details">
             <EntityTypeMapping TypeName="ClubWorldModel.VW_League_Details">
               <MappingFragment StoreEntitySet="VW_League_Details">

@@ -33,7 +33,7 @@ namespace ClubWorld.Models.League
 
             return LeagueTable;
         }
-        public static List<LeagueDetails> AllLeagues()
+        public static List<LeagueDetailsModel> AllLeagues()
         {
             return _Repository.LeagueResults_GetLeagueList();
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ClubWorld.Models.Shared
+namespace ClubWorld.Repositories.Models
 {
-    public class AvailableSession
+    public class AvailableSessionModel
     {
         public TimeSpan StartingAt { get; set; }
         public TimeSpan EndingAfter { get; set; }

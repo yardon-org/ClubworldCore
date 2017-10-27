@@ -10,17 +10,17 @@
 namespace ClubWorld.Database.EntityModel
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class League_ShowLeagueTable_Result
+    public partial class VW_League_Details
     {
-        public string TeamName { get; set; }
-        public Nullable<int> Played { get; set; }
-        public Nullable<int> Won { get; set; }
-        public Nullable<int> Drawn { get; set; }
-        public Nullable<int> Lost { get; set; }
-        public Nullable<int> ShotsFor { get; set; }
-        public Nullable<int> ShotsAgainst { get; set; }
-        public Nullable<int> Diff { get; set; }
-        public string Points { get; set; }
+        public int LeagueId { get; set; }
+        public Nullable<int> FixtureTypeId { get; set; }
+        public string Description { get; set; }
+        public string LeagueType { get; set; }
+        public Nullable<int> RinksPerFixtue { get; set; }
+        public Nullable<int> PointsPerGame { get; set; }
+        public Nullable<int> PointsPerRink { get; set; }
+        public Nullable<int> DisplayColour { get; set; }
     }
 }

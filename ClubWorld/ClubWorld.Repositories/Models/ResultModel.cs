@@ -1,18 +1,17 @@
-﻿using ClubWorld.Models.League;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ClubWorld.Models.League.Results
+namespace ClubWorld.Repositories.Models
 {
-    public class ResultRecord
+    public class ResultModel
     {
         public int FixtureRef { get; set; }
         public int FixtureType { get; set; }
         public int HomeShots { get; set; }
         public int AwayShots { get; set; }
-        public List<Player> HomeRink { get; set; }
-        public List<Player> AwayRink { get; set; }
+        public List<PlayerModel> HomeRink { get; set; }
+        public List<PlayerModel> AwayRink { get; set; }
     }
 }

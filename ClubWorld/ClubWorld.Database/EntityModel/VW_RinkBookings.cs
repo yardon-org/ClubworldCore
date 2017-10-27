@@ -10,16 +10,17 @@
 namespace ClubWorld.Database.EntityModel
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class ShowBookingsForDay_Result
+    public partial class VW_RinkBookings
     {
-        public int SessionId { get; set; }
-        public string Rink1 { get; set; }
-        public string Rink2 { get; set; }
-        public string Rink3 { get; set; }
-        public string Rink4 { get; set; }
-        public string Rink5 { get; set; }
-        public string Rink6 { get; set; }
-        public string Rink7 { get; set; }
+        public int SessionID { get; set; }
+        public Nullable<int> Rink1 { get; set; }
+        public Nullable<int> Rink2 { get; set; }
+        public Nullable<int> Rink3 { get; set; }
+        public Nullable<int> Rink4 { get; set; }
+        public Nullable<int> Rink5 { get; set; }
+        public Nullable<int> Rink6 { get; set; }
+        public Nullable<int> Rink7 { get; set; }
     }
 }

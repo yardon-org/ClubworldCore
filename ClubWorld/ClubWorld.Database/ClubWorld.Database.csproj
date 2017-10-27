@@ -101,24 +101,6 @@
     <Compile Include="EntityModel\Competition_Rounds.cs">
       <DependentUpon>ClubWorldDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\GenerateCalendar_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\GetBookingsForDay_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\GetFreeRinks_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\LeagueResults_FixturesForLeague_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\LeagueResults_GetFixture_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\LeagueResult_TeamsForFixture_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\League_Fixtures.cs">
       <DependentUpon>ClubWorldDb.tt</DependentUpon>
     </Compile>
@@ -137,13 +119,7 @@
     <Compile Include="EntityModel\League_ResultPlayers.cs">
       <DependentUpon>ClubWorldDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\League_ShowLeagueTable_Result.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\League_Teams.cs">
-      <DependentUpon>ClubWorldDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\ShowBookingsForDay_Result.cs">
       <DependentUpon>ClubWorldDb.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\VW_League_Details.cs">

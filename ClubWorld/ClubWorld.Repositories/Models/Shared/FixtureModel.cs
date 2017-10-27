@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ClubWorld.Models.Shared
+namespace ClubWorld.Repositories.Models
 {
-    public class Fixture
+    public class FixtureModel
     {
         public int FixtureRef { get; set; }
         public int DiaryRef { get; set; }
