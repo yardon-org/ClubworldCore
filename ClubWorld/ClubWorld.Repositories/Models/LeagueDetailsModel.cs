@@ -1,4 +1,4 @@
-﻿using ClubWorld.Repositories.Models.Shared;
+﻿using ClubWorld.Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

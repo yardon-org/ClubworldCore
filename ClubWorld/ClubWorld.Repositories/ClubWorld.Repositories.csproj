@@ -52,8 +52,10 @@
     <Compile Include="LeagueRepo.cs" />
     <Compile Include="Models\LeagueDetailsModel.cs" />
     <Compile Include="Models\LeagueFixtureModel.cs" />
+    <Compile Include="Models\LeagueTableModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\TeamFixtureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Shared\AvailableSessionModel.cs" />
     <Compile Include="Models\Shared\FixtureModel.cs" />
@@ -64,10 +66,6 @@
     <ProjectReference Include="..\..\..\ClubWorld.Data.SQL\ClubWorld.Data.SQL\ClubWorld.Data.SQL.csproj">
       <Project>{E3FB817C-C55A-46E1-9C3B-14CC664A3527}</Project>
       <Name>ClubWorld.Data.SQL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClubWorld.Web\ClubWorld.Web.csproj">
-      <Project>{E52490BD-C3A6-4275-AF24-F828F0666C01}</Project>
-      <Name>ClubWorld.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

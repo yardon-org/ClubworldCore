@@ -29,9 +29,19 @@ namespace ClubWorld.Repositories
                         AwayTeamRef = fix.AwayTeamRef
                     }).Take(NoOfRecs).ToList();
         }
-        public List<TeamsForFixture> LeagueResult_GetTeamsForFixture(int FixtureId)
+        public List<TeamFixtureModel> LeagueResult_GetTeamsForFixture(int FixtureId)
         {
-             return _db.LeagueResult_TeamsForFixture(FixtureId).ToList();
+            return
+                (from t in _db.LeagueResult_TeamsForFixture(FixtureId)
+                 select new TeamFixtureModel
+                 {
+                     Forename = t.Forename,
+                     PlayerRef = t.PlayerRef,
+                     RegistrationId = t.RegistrationId,
+                     Surname = t.Surname,
+                     TeamRef = t.TeamRef
+                 }
+                 ).ToList();
         }
 
         public ResultFixture LeagueResult_GetFixture(int FixtureId)
@@ -53,50 +63,50 @@ namespace ClubWorld.Repositories
         public int AddResult(int FixtureRef, int HomeShots, int AwayShots)
         {
             ObjectParameter resultRef = new ObjectParameter("ResultId", typeof(Int32));
-                _db.LeagueResults_AddResult(FixtureRef, HomeShots, AwayShots, resultRef);
-                return (int)resultRef.Value;
+            _db.LeagueResults_AddResult(FixtureRef, HomeShots, AwayShots, resultRef);
+            return (int)resultRef.Value;
         }
         public void AddResultPlayers(int ResultRef, int RegistrationRef)
         {
-                _db.LeagueResults_AddResultPlayers(ResultRef, RegistrationRef);
+            _db.LeagueResults_AddResultPlayers(ResultRef, RegistrationRef);
         }
 
         public void InsertResultRecords(List<ResultModel> resultList)
         {
-                DbContextTransaction tran = _db.Database.BeginTransaction();
+            DbContextTransaction tran = _db.Database.BeginTransaction();
 
-                foreach (var res in resultList)
+            foreach (var res in resultList)
+            {
+                League_Result resEntity = new League_Result
                 {
-                    League_Result resEntity = new League_Result
-                    {
-                        FixtureRef = res.FixtureRef,
-                        ResultType = res.FixtureType,
-                        HomeShots = res.HomeShots,
-                        AwayShots = res.AwayShots
-                    };
-                    _db.League_Result.Add(resEntity);
+                    FixtureRef = res.FixtureRef,
+                    ResultType = res.FixtureType,
+                    HomeShots = res.HomeShots,
+                    AwayShots = res.AwayShots
+                };
+                _db.League_Result.Add(resEntity);
 
-                    _db.SaveChanges();
-
-                    int resID = resEntity.ResultID;
-
-                    League_Fixtures fixEntity = _db.League_Fixtures.SingleOrDefault(lf => lf.FixtureId == res.FixtureRef);
-                    fixEntity.FixtureTypeRef = res.FixtureType;
-
-                    foreach (PlayerModel p in res.HomeRink)
-                    {
-                        League_ResultPlayers lrp = new League_ResultPlayers
-                        {
-                            ResultRef = resEntity.ResultID,
-                            RegistrationRef = p.RegistrationId
-                        };
-
-                        _db.League_ResultPlayers.Add(lrp);
-                    }
-                }
                 _db.SaveChanges();
 
-                tran.Commit();
+                int resID = resEntity.ResultID;
+
+                League_Fixtures fixEntity = _db.League_Fixtures.SingleOrDefault(lf => lf.FixtureId == res.FixtureRef);
+                fixEntity.FixtureTypeRef = res.FixtureType;
+
+                foreach (PlayerModel p in res.HomeRink)
+                {
+                    League_ResultPlayers lrp = new League_ResultPlayers
+                    {
+                        ResultRef = resEntity.ResultID,
+                        RegistrationRef = p.RegistrationId
+                    };
+
+                    _db.League_ResultPlayers.Add(lrp);
+                }
+            }
+            _db.SaveChanges();
+
+            tran.Commit();
         }
     }
 }

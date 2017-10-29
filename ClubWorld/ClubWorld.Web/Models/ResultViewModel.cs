@@ -1,16 +1,16 @@
-﻿using ClubWorld.Models.Shared;
+﻿using ClubWorld.Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ClubWorld.Models.League.Results
+namespace ClubWorld.Models
 {
     public class ResultViewModel
     {
-        public List<LeagueDetails> LeagueList { get; set; }
+        public List<LeagueDetailsModel> LeagueList { get; set; }
         public int LeagueId { get; set; }
         public string LeagueName { get { return Fixtures[0].LeagueName; } }
-        public List<Fixture> Fixtures { get; set; }
+        public List<FixtureModel> Fixtures { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using ClubWorld.Models.DataAccess;
 using ClubWorld.Models.League.Results;
-using ClubWorld.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +32,6 @@ namespace ClubWorld.Models.League
 
             return LeagueTable;
         }
-        public static List<LeagueDetailsModel> AllLeagues()
-        {
-            return _Repository.LeagueResults_GetLeagueList();
-        }
-
         public static ResultViewModel FixturesForLeague(int LeagueId)
         {
             ResultViewModel rvm = new ResultViewModel();
@@ -78,10 +72,6 @@ namespace ClubWorld.Models.League
                 }
             }
             return rvm;
-        }
-        public static void InsertResultToDb(List<ResultRecord> res)
-        {
-            _Repository.LeagueResult_InsertResultRecords(res);
         }
     }
 }

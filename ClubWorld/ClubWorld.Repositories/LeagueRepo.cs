@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ClubWorld.Repositories
 {
-    class LeagueRepo
+    public class LeagueRepo
     {
         ClubWorldContext _db = new ClubWorldContext();
-        public List<LeagueDetailsModel> LeagueResults_GetLeagueList()
+        public List<LeagueDetailsModel> GetAllLeagues()
         {
             return (
                     from league in _db.League_List
@@ -21,9 +21,21 @@ namespace ClubWorld.Repositories
                         Name = league.Description
                     }).ToList();
         }
-        public List<League_ShowLeagueTable_Result> GetLeagueTable(int LeagueId)
+        public IEnumerable<LeagueTableModel> GetLeagueTable(int LeagueId)
         {
-            return _db.League_ShowLeagueTable(LeagueId).ToList();
+            return
+                (from l in _db.League_ShowLeagueTable(LeagueId)
+                 select new LeagueTableModel
+                 {
+                     Difference = l.Diff ?? 0,
+                     Drawn = l.Drawn ?? 0,
+                     Lost = l.Lost ?? 0,
+                     Played = l.Played ?? 0,
+                     Points = l.Points,
+                     ShotsAgainst = l.ShotsAgainst ?? 0,
+                     ShotsFor = l.ShotsFor ?? 0,
+                     TeamName = l.TeamName
+                 });
         }
     }
 }
